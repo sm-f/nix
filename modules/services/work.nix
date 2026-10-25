@@ -29,9 +29,9 @@
           azure-functions-core-tools
           azurite
           bicep
+          csharp-ls
           dbeaver-bin
           dotnet-combined
-          easydotnet
           keepass
           keepassxc
           libreoffice

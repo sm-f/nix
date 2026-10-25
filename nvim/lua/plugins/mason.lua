@@ -34,7 +34,6 @@ return {
             "ols",
             "powershell-editor-services",
             "prettier",
-            "roslyn",
             "rust-analyzer",
             "shfmt",
             "stylua",
