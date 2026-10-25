@@ -138,15 +138,6 @@ M.diagnostics = function()
     return " " .. table.concat(components, "") .. " "
 end
 
---- Buffer location component - dependes on nvim-navic
---- @param hl string The highlight group to use
-M.navic = function(hl)
-    if package.loaded["nvim-navic"] and require("nvim-navic").is_available() then
-        return format_component(require("nvim-navic").get_location(), hl)
-    end
-    return ""
-end
-
 --- Status messages component. Shows @recording meesages.
 --- @param hl string|nil The highlight group to use
 --- @return string
@@ -283,8 +274,6 @@ local components = {
     component("git_branch", "Changed"),
     component("git_diff", "Type"),
     component("diagnostics"),
-    "%<", -- mark general truncate point
-    component("navic", "Comment"),
     "%=", -- mark end of left alignment
     component("status_messages"),
     component("lazy_updates", "String"),
