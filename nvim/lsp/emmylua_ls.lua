@@ -1,6 +1,7 @@
 --- @type vim.lsp.Config
 return {
     cmd = { "emmylua_ls" },
+    root_markers = { ".emmyrc.json", ".stylua.toml", ".git" },
     filetypes = { "lua" },
     settings = {
         Lua = {
