@@ -12,6 +12,7 @@
             pkgs.coreutils
             pkgs.git
             pkgs.jq
+            pkgs.nix
           ];
           text = ''
             readonly REPO_DIR="''${NIX_REPO_DIR:-$HOME/git/nix}"
@@ -20,7 +21,8 @@
             resolved=$(mktemp)
             trap 'rm -f "$resolved"' EXIT
 
-            if ! nix flake update --flake "$REPO_DIR" --output-lock-file "$resolved" >/dev/null 2>&1; then
+            if ! err=$(nix flake update --flake "$REPO_DIR" --output-lock-file "$resolved" 2>&1); then
+              printf 'nix-update-check: flake update failed, leaving indicator untouched:\n%s\n' "$err" >&2
               exit 0 # offline or broken: leave the indicator untouched
             fi
 
