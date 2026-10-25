@@ -2,8 +2,16 @@
 {
   den.aspects.zsh = {
     nixos =
-      { ... }:
+      { pkgs, ... }:
       {
+        environment.systemPackages = with pkgs; [
+          bat
+          eza
+          fzf
+          starship
+          zoxide
+        ];
+
         programs.zsh = {
           enableCompletion = true;
           autosuggestions.enable = true;

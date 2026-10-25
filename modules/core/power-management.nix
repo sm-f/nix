@@ -14,8 +14,10 @@
     ];
 
     nixos =
-      { ... }:
+      { pkgs, ... }:
       {
+        environment.systemPackages = [ pkgs.brightnessctl ];
+
         powerManagement.enable = true;
         services.tlp = {
           enable = true;

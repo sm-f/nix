@@ -5,33 +5,22 @@
       { pkgs, ... }:
       {
         environment.systemPackages = with pkgs; [
-          adw-gtk3
-          adwaita-icon-theme
-          age
           air
-          ansible
           basedpyright
           bash-language-server
-          bat
-          brightnessctl
           btop
           bun
           cargo
           clang-tools
-          cliphist
           csharp-ls
-          cups-pk-helper
           delta
           emmylua-ls
-          eza
           fd
           fetch
           fluxcd
-          fzf
           gcc
           gh
           gh-markdown-preview
-          ghostty
           git
           gnumake
           go
@@ -45,10 +34,7 @@
           kubectl
           kubectl-cnpg
           lazygit
-          libnotify
-          libsecret
           neovim
-          nh
           nixd
           nixfmt
           nodejs
@@ -56,7 +42,6 @@
           ols
           openssl
           pi-coding-agent
-          playerctl
           powershell
           powershell-editor-services
           presenterm
@@ -69,15 +54,12 @@
           rustc
           rustfmt
           shfmt
-          sops
           sqlc
           sqlite
-          starship
           stylua
           tailwindcss-language-server
           talosctl
           taplo
-          tela-icon-theme
           templ
           tokei
           tree
@@ -89,11 +71,8 @@
           vlc
           vscode-langservers-extracted
           wget
-          wl-clipboard
-          wl-mirror
           yaml-language-server
           zizmor
-          zoxide
         ];
       };
   };

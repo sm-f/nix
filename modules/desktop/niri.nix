@@ -8,7 +8,22 @@
           enable = lib.mkForce true;
           package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri;
         };
-        environment.systemPackages = [ pkgs.xwayland-satellite ];
+
+        environment.systemPackages = with pkgs; [
+          adw-gtk3
+          adwaita-icon-theme
+          cliphist
+          cups-pk-helper
+          ghostty
+          libnotify
+          libsecret
+          playerctl
+          tela-icon-theme
+          wl-clipboard
+          wl-mirror
+          xwayland-satellite
+        ];
+
         services.upower.enable = true;
         services.udisks2.enable = true;
         # TDOO: Add dux-files when 576721 lands in nixpkgs.
