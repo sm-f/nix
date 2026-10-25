@@ -6,17 +6,6 @@ vim.g.user = os.getenv("USERNAME") or os.getenv("USER")
 local opt = vim.opt
 opt.shell = "zsh"
 
--- Set shell to PowerShell 7 if on Win32 or Win64
-if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
-    opt.shell = "pwsh -NoLogo"
-    opt.shellcmdflag =
-        "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
-    opt.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"
-    opt.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
-    opt.shellquote = ""
-    opt.shellxquote = ""
-end
-
 -- UI/General
 opt.number = true
 opt.relativenumber = true
