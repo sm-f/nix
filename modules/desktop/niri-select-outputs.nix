@@ -9,23 +9,21 @@
         ...
       }:
       let
+        dir = "${config.users.users.scott.home}/.config/niri";
         niri-select-outputs = pkgs.writeShellApplication {
           name = "niri-select-outputs";
           runtimeInputs = [ pkgs.usbutils ];
           text = ''
             set -euo pipefail
 
-            DOCK_USB_ID="17e9:6006"
-            NIRI_DIR="''${HOME}/.config/niri"
-
-            if lsusb | grep -q "$DOCK_USB_ID"; then
-                target="output-docked.kdl"
+            if lsusb -d 17e9:6006 >/dev/null 2>&1; then
+              target=docked
             else
-                target="output-mobile.kdl"
+              target=mobile
             fi
 
-            ln -sfn "''${NIRI_DIR}/''${target}" "''${NIRI_DIR}/output-active.kdl"
-            echo "niri outputs: using ''${target}"
+            ln -sfn "${dir}/output-$target.kdl" "${dir}/output-active.kdl"
+            echo "niri outputs: $target"
           '';
         };
       in
@@ -44,11 +42,10 @@
         # re-select niri outputs on Dell D6000 dock connect/disconnect
         services.udev.extraRules = ''
           ACTION=="add|remove", \
-          ENV{ID_BUS}=="usb", \
-          ENV{ID_VENDOR_ID}=="17e9", \
-          ENV{ID_MODEL_ID}=="6006", \
-          TAG+="systemd", \
-          ENV{SYSTEMD_USER_WANTS}+="niri-select-outputs.service"
+          SUBSYSTEM=="usb", \
+          ENV{DEVTYPE}=="usb_device", \
+          ENV{PRODUCT}=="17e9/6006/*", \
+          RUN+="${niri-select-outputs}/bin/niri-select-outputs"
         '';
       };
   };
