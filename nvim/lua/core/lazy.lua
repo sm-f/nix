@@ -27,16 +27,4 @@ require("lazy").setup({
         border = "rounded",
         pills = false,
     },
-    performance = {
-        rtp = {
-            disabled_plugins = {
-                "gzip",
-                "tarPlugin",
-                "tohtml",
-                "zipPlugin",
-                "netrwPlugin",
-                "tutor",
-            },
-        },
-    },
 })
