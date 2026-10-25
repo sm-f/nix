@@ -9,8 +9,7 @@
         nix-update-check = pkgs.writeShellApplication {
           name = "nix-update-check";
           runtimeInputs = [
-            pkgs.coreutils
-            pkgs.git
+            pkgs.diffutils
             pkgs.jq
             pkgs.nix
           ];
@@ -21,9 +20,8 @@
             resolved=$(mktemp)
             trap 'rm -f "$resolved"' EXIT
 
-            if ! err=$(nix flake update --flake "$REPO_DIR" --output-lock-file "$resolved" 2>&1); then
-              printf 'nix-update-check: flake update failed, leaving indicator untouched:\n%s\n' "$err" >&2
-              exit 0 # offline or broken: leave the indicator untouched
+            if ! nix flake update --flake "$REPO_DIR" --output-lock-file "$resolved"; then
+              exit 1 # exit with error if flake update fails
             fi
 
             if jq -S . "$REPO_DIR/flake.lock" | cmp -s - <(jq -S . "$resolved"); then
