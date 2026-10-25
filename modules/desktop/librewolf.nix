@@ -1,8 +1,9 @@
-{ lib, ... }:
+{ inputs, lib, ... }:
 {
   den.aspects.librewolf.hjem =
     { pkgs, ... }:
     let
+      stablePkgs = inputs.nixpkgs-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
       extensions = {
         "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
           slug = "bitwarden-password-manager";
@@ -32,7 +33,7 @@
       clobberFiles = true;
 
       packages = [
-        (pkgs.librewolf.override {
+        (stablePkgs.librewolf.override {
           extraPolicies.ExtensionSettings = extensionSettings;
         })
       ];

@@ -9,6 +9,7 @@
         azure-cli = stablePkgs.azure-cli;
         azure-functions-core-tools = stablePkgs.azure-functions-core-tools;
         bicep = stablePkgs.bicep;
+        libreoffice = stablePkgs.libreoffice;
 
         dotnet-combined =
           with pkgs.dotnetCorePackages;
