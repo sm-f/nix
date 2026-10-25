@@ -29,7 +29,6 @@
           azure-functions-core-tools
           azurite
           bicep
-          csharp-ls
           dbeaver-bin
           dotnet-combined
           keepass
@@ -41,7 +40,6 @@
 
         environment.sessionVariables = {
           DOTNET_ROOT = "${dotnet-combined}/share/dotnet";
-          DOTNET_ROOT_X64 = "${dotnet-combined}/share/dotnet";
           DOTNET_MULTILEVEL_LOOKUP = "0";
         };
 

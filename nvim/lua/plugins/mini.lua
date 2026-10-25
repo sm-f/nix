@@ -25,7 +25,6 @@ return {
                     "copilot-chat",
                     "help",
                     "lazy",
-                    "mason",
                     "neotree",
                     "notify",
                     "snacks_terminal",

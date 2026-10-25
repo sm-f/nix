@@ -8,10 +8,6 @@ vim.diagnostic.config({
     },
 })
 
--- Add mason binaries to PATH
-local mason_bin = vim.fn.stdpath("data") .. "/mason/bin"
-vim.env.PATH = mason_bin .. ":" .. vim.env.PATH
-
 -- enable all lsp defs in nvim/lsp
 local lsp_dir = vim.fn.stdpath("config") .. "/lsp"
 local servers = {}

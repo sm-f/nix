@@ -205,7 +205,6 @@ M.file_name = function(hl)
         ["copilot-chat"] = { name = "copilot", icon = "󰚩", icon_hl = "MiniIconsAzure" },
         ["grug-far"] = { name = "grug-far", icon = "", icon_hl = "DiagnosticWarn" },
         ["lazy"] = { name = "lazy.nvim", icon = "󰒲", icon_hl = "Directory" },
-        ["mason"] = { name = "mason", icon = "󱌣", icon_hl = "MiniIconsAzure" },
         ["minifiles"] = { name = "files", icon = "󰝰", icon_hl = "Directory" },
         ["snacks_picker_input"] = { name = "picker", icon = "󰦨", icon_hl = "Changed" },
     }

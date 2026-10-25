@@ -15,13 +15,11 @@ return {
             mdx = { "prettier" },
             nix = { "nixfmt" },
             python = { "ruff_organize_imports", "ruff_format" },
-            qml = { "qmlformat" },
             rust = { "rustfmt" },
             scss = { "prettier" },
             sh = { "shfmt" },
             templ = { "templ" },
             toml = { "taplo" },
-            typst = { "typstyle" },
             yaml = { "prettier" },
         },
 
