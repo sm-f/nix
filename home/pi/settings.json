@@ -13,7 +13,6 @@
   "editorPaddingX": 1,
   "packages": [
     "npm:pi-web-access",
-    "npm:@narumitw/pi-starship",
     "/home/scott/git/pi-copium/"
   ],
   "enabledModels": [
