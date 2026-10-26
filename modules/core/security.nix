@@ -2,13 +2,8 @@
 {
   den.aspects.core = {
     nixos =
-      { pkgs, ... }:
+      { ... }:
       {
-        environment.systemPackages = with pkgs; [
-          age
-          sops
-        ];
-
         # howdy: IR face auth (Windows Hello-style)
         services.howdy = {
           enable = true;

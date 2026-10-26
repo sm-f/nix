@@ -5,7 +5,7 @@ return {
     opts = {
         formatters_by_ft = {
             css = { "prettier" },
-            go = { "goimports_reviser", "gofmt" },
+            go = { "gofmt" },
             html = { "prettier" },
             javascript = { "prettier" },
             typescript = { "prettier" },
@@ -36,12 +36,5 @@ return {
                 return { lsp_format = "fallback", async = true }
             end
         end,
-
-        formatters = {
-            goimports_reviser = {
-                command = "goimports-reviser",
-                args = { "-output", "stdout", "$FILENAME" },
-            },
-        },
     },
 }

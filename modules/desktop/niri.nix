@@ -26,8 +26,8 @@
 
         services.upower.enable = true;
         services.udisks2.enable = true;
-        # TDOO: Add dux-files when 576721 lands in nixpkgs.
-        # This will replace nautilus.
+        programs.dux-files.enable = true;
+        programs.dux-search.enable = true;
         programs.dux-shell.enable = true;
         programs.dux-shell.systemd.enable = true;
         services.displayManager.dux-greeter = {

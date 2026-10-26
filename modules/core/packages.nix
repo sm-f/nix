@@ -5,69 +5,40 @@
       { pkgs, ... }:
       {
         environment.systemPackages = with pkgs; [
-          air
-          basedpyright
           bash-language-server
           btop
-          bun
-          cargo
-          clang-tools
-          csharp-ls
           delta
           emmylua-ls
           fd
           fetch
-          fluxcd
           gcc
           gh
           gh-markdown-preview
           git
           gnumake
-          go
-          go-task
-          goimports-reviser
-          gopls
           jq
           just
           k9s
           killall
-          kubectl
-          kubectl-cnpg
           lazygit
           neovim
           nixd
           nixfmt
           nodejs
-          odin
-          ols
           openssl
           pi-coding-agent
           powershell
           powershell-editor-services
-          presenterm
           prettier
           python3
           restic
           ripgrep
-          ruff
-          rust-analyzer
-          rustc
-          rustfmt
           shfmt
-          sqlc
-          sqlite
           stylua
-          tailwindcss-language-server
-          talosctl
-          taplo
-          templ
           tokei
           tree
           tree-sitter
-          typescript
-          typescript-language-server
           unzip
-          uv
           vlc
           vscode-langservers-extracted
           wget
