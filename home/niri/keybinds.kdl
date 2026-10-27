@@ -3,7 +3,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // --- Applications / Utility ---
-    Mod+Shift+S      { screenshot; }
+    Mod+Shift+S      { spawn-sh "dms screenshot"; }
     Mod+RETURN       { spawn "ghostty"; }
     Mod+B            { spawn "librewolf"; }
     Mod+E            { spawn "nautilus"; }
