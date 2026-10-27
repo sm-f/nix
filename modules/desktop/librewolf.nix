@@ -18,6 +18,9 @@
         "ATBC@EasonWong" = {
           slug = "adaptive-tab-bar-colour";
         };
+        "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
+          slug = "vimium-ff";
+        };
       };
 
       extensionSettings = builtins.mapAttrs (
