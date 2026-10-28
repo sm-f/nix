@@ -11,17 +11,9 @@
   "quietStartup": false,
   "doubleEscapeAction": "none",
   "editorPaddingX": 1,
+  "shellCommandPrefix": "eval \"$(direnv export bash 2>/dev/null)\"",
   "packages": [
     "npm:pi-web-access",
     "/home/scott/git/pi-copium/"
-  ],
-  "enabledModels": [
-    "github-copilot/gpt-5.6-terra",
-    "github-copilot/gpt-5.6-luna",
-    "opencode-go/mimo-v2.5-pro",
-    "github-copilot/claude-haiku-5.5",
-    "opencode-go/deepseek-v4.1-flash",
-    "opencode-go/glm-5.3-flash",
-    "opencode-go/qwen3.8-flash"
   ]
 }
