@@ -31,11 +31,3 @@ layer-rule {
     match namespace="quickshell"
     place-within-backdrop true
 }
-
-// Blur effects
-window-rule {
-    match app-id=r#"(?i)^com.mitchellh.ghostty$"#
-    background-effect {
-        blur true
-    }
-}
