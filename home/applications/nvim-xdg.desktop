@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Neovim
-Exec=ghostty -e nvim %f
+Exec=sh -c 'ghostty +new-tab -e nvim "$@" || ghostty -e nvim "$@"' sh %f
 Icon=nvim
 Categories=Utility;TextEditor;
 Terminal=false

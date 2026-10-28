@@ -11,7 +11,7 @@ binds {
     Mod+V            { spawn-sh "dms ipc call clipboard toggle"; }
     Mod+Alt+L        { spawn-sh "dms ipc call lock lock"; }
     Mod+Shift+C      { spawn-sh "dms color pick -a"; }
-    Mod+Shift+Escape { spawn-sh "ghostty -e btop"; }
+    Mod+Shift+Escape { spawn-sh "ghostty +new-tab -e btop || ghostty -e btop"; }
     Mod+P            { spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)"; }
 
     // --- System Actions ---
