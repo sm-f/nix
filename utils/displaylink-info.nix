@@ -2,7 +2,8 @@
 # nixpkgs' displaylink package expects. We overlay requireFile so the
 # requirement message itself becomes readable instead of failing the build.
 let
-  flake = builtins.getFlake (toString ./..);
+  getFlake = builtins.getAttr "getFlake" builtins;
+  flake = getFlake (toString ./..);
   pkgs = import flake.inputs.nixpkgs {
     system = "x86_64-linux";
     config.allowUnfree = true;
