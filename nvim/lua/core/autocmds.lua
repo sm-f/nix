@@ -3,6 +3,7 @@ local augroup = vim.api.nvim_create_augroup
 
 -- General Settings
 local general = augroup("General Settings", { clear = true })
+local using_stdin = false
 
 autocmd("FileType", {
     group = general,
@@ -25,7 +26,7 @@ autocmd("FileType", {
 autocmd("VimEnter", {
     group = general,
     callback = function()
-        if vim.fn.argc(-1) == 0 and not vim.g.using_stdin then
+        if vim.fn.argc(-1) == 0 and not using_stdin then
             require("resession").load(vim.fn.getcwd(), { silence_errors = true })
         end
     end,
@@ -43,6 +44,6 @@ autocmd("VimLeavePre", {
 
 autocmd("StdinReadPre", {
     callback = function()
-        vim.g.using_stdin = true
+        using_stdin = true
     end,
 })

@@ -1,38 +1,20 @@
 local M = {}
 
--- Mode mappings
-local mode_map = {
-    ["n"] = "NORMAL",
-    ["no"] = "NORMAL",
-    ["v"] = "VISUAL",
-    ["V"] = "V-LINE",
-    ["\22"] = "V-BLOCK",
-    ["i"] = "INSERT",
-    ["c"] = "COMMAND",
-    ["r"] = "REPLACE",
-    ["r?"] = "CONFIRM",
-    ["!"] = "SHELL",
-    ["t"] = "TERMINAL",
-    ["nt"] = "TERMINAL",
-}
-
-local mode_hl_map = {
-    ["NORMAL"] = "Directory",
-    ["VISUAL"] = "Number",
-    ["V-LINE"] = "Number",
-    ["V-BLOCK"] = "Number",
-    ["INSERT"] = "String",
-    ["COMMAND"] = "Keyword",
-    ["TERMINAL"] = "Keyword",
-}
-
 -- Helper functions
 --- Global function for statusline component rendering. Can be called directly from the statusline
 --- @param name string The name of the component to render
---- @param hl string The highlight group to use for the component
+--- @param hl string|nil The highlight group to use for the component
 --- @return string
 function _G._statusline_component(name, hl)
+    ---@diagnostic disable-next-line: call-non-callable, need-check-nil
     return M[name](hl)
+end
+
+--- Escape statusline control characters in dynamic text
+--- @param val string The value to escape
+--- @return string
+local function esc(val)
+    return (tostring(val):gsub("%%", "%%%%"))
 end
 
 --- Format a given component value with a highlight group in the format expected by the statusline
@@ -63,45 +45,45 @@ local function component(val, hl)
     return "%{%v:lua._statusline_component('" .. val .. "', '" .. hl .. "')%}"
 end
 
---- Get the count of diagnostics for a given severity
---- @param severity "ERROR"|"WARN"|"HINT"|"INFO"
---- @return number
-local function get_diagnostic_count(severity)
-    return #vim.diagnostic.get(0, { severity = vim.diagnostic.severity[severity] })
-end
-
---- Get the corresponding highlight group and statusline value for the current vim mode
---- @return string, string
-local function get_mode_info()
-    local mode = vim.api.nvim_get_mode().mode
-    local val = mode_map[mode]
-    return val, mode_hl_map[val]
-end
-
 -- Components
 --- Mode component with dynamic highlights
 --- @return string
 M.mode = function()
-    local val, hl = get_mode_info()
-    if not val then
-        return ""
-    end
+    local mode_info = {
+        ["n"] = { "NORMAL", "Directory" },
+        ["no"] = { "NORMAL", "Directory" },
+        ["v"] = { "VISUAL", "Number" },
+        ["V"] = { "V-LINE", "Number" },
+        ["\22"] = { "V-BLOCK", "Number" },
+        ["i"] = { "INSERT", "String" },
+        ["c"] = { "COMMAND", "Keyword" },
+        ["r"] = { "REPLACE", "Error" },
+        ["r?"] = { "CONFIRM", "Error" },
+        ["!"] = { "SHELL", "Keyword" },
+        ["t"] = { "TERMINAL", "Keyword" },
+        ["nt"] = { "TERMINAL", "Keyword" },
+    }
+
+    local mode = vim.api.nvim_get_mode().mode
+    local info = mode_info[mode]
+    local val = info and info[1] or mode:sub(1, 1):upper()
+    local hl = info and info[2]
     return format_component(" " .. string.lower(val), hl)
 end
 
 --- Git branch component based on CWD - depends on gitsigns.nvim
---- @param hl string The highlight group to use
+--- @param hl string|nil The highlight group to use
 --- @return string
 M.git_branch = function(hl)
     local branch = vim.g.gitsigns_head
     if not branch then
         return ""
     end
-    return format_component(" " .. branch, hl)
+    return format_component(" " .. esc(branch), hl)
 end
 
 --- Git diff component - current buffer, depends on gitsigns.nvim
---- @param hl string The highlight group to use
+--- @param hl string|nil The highlight group to use
 --- @return string
 M.git_diff = function(hl)
     local summary = vim.b.gitsigns_status
@@ -113,48 +95,53 @@ M.git_diff = function(hl)
     summary = summary:gsub("-", " ")
     summary = summary:gsub("~", " ")
 
-    return format_component(summary, hl)
+    return format_component(esc(summary), hl)
 end
 
 --- Buffer diagnostics component
 --- @return string
 M.diagnostics = function()
-    local errors = get_diagnostic_count("ERROR")
-    local warnings = get_diagnostic_count("WARN")
-    local hints = get_diagnostic_count("HINT")
-    local info = get_diagnostic_count("INFO")
+    local counts = vim.diagnostic.count(0)
+    local components = {}
+    local items = {
+        { severity = vim.diagnostic.severity.ERROR, icon = " ", hl = "DiagnosticError" },
+        { severity = vim.diagnostic.severity.WARN, icon = " ", hl = "DiagnosticWarn" },
+        { severity = vim.diagnostic.severity.HINT, icon = " ", hl = "DiagnosticHint" },
+        { severity = vim.diagnostic.severity.INFO, icon = "󰝶 ", hl = "DiagnosticInfo" },
+    }
 
-    if errors + warnings + hints + info == 0 then
+    for _, item in ipairs(items) do
+        local count = counts[item.severity]
+        if count and count > 0 then
+            components[#components + 1] = format_component(item.icon .. count, item.hl, "", "")
+        end
+    end
+
+    if #components == 0 then
         return ""
     end
 
-    local components = {
-        errors > 0 and format_component(" " .. errors, "DiagnosticError", "") or "",
-        warnings > 0 and format_component(" " .. warnings, "DiagnosticWarn", "") or "",
-        hints > 0 and format_component(" " .. hints, "DiagnosticHint", "") or "",
-        info > 0 and format_component("󰝶 " .. info, "DiagnosticInfo", "") or "",
-    }
-
-    return " " .. table.concat(components, "") .. " "
+    return " " .. table.concat(components, " ") .. " "
 end
 
---- Status messages component. Shows @recording meesages.
+--- Status messages component. Shows @recording messages.
 --- @param hl string|nil The highlight group to use
 --- @return string
 M.status_messages = function(hl)
     local reg = vim.fn.reg_recording()
     if reg ~= "" then
-        return format_component("recording @" .. reg, hl)
+        return format_component("recording @" .. esc(reg), hl)
     end
     return ""
 end
 
 --- Lazy updates component - show pending lazy.nvim updates
---- @param hl string The highlight group to use
+--- @param hl string|nil The highlight group to use
+--- @return string
 M.lazy_updates = function(hl)
     local updates = require("lazy.status").updates()
     if type(updates) == "string" then
-        return format_component(updates, hl)
+        return format_component(esc(updates), hl)
     end
     return ""
 end
@@ -162,7 +149,7 @@ end
 --- Copilot status component - depends on copilot.lua
 --- @return string
 M.copilot_status = function()
-    local copilot_highlights = {
+    local highlights = {
         [""] = "Comment",
         ["Normal"] = "Comment",
         ["Warning"] = "DiagnosticError",
@@ -175,7 +162,7 @@ M.copilot_status = function()
     end
 
     local status = require("copilot.status").data.status
-    return format_component(" ", copilot_highlights[status])
+    return format_component(" ", highlights[status])
 end
 
 --- Search count component - show current and total search matches when searching a buffer
@@ -186,7 +173,7 @@ M.search_count = function(hl)
         return ""
     end
 
-    local ok, s_count = pcall(vim.fn.searchcount, { recompute = true })
+    local ok, s_count = pcall(vim.fn.searchcount, { maxcount = 999 })
     if not ok or s_count.current == nil or s_count.total == 0 then
         return ""
     end
@@ -199,7 +186,8 @@ M.search_count = function(hl)
 end
 
 --- File name component - show the current buffer's file name and coloured icon. Depends on mini.icons.
---- @param hl string The highlight group to use
+--- @param hl string|nil The highlight group to use
+--- @return string
 M.file_name = function(hl)
     local ft_overrides = {
         ["copilot-chat"] = { name = "copilot", icon = "󰚩", icon_hl = "MiniIconsAzure" },
@@ -217,14 +205,15 @@ M.file_name = function(hl)
     }
 
     local ft = vim.bo.filetype
-    if ft_overrides[ft] then
-        return format_component(ft_overrides[ft].icon, ft_overrides[ft].icon_hl, " ", "")
-            .. format_component(ft_overrides[ft].name, hl)
+    local override = ft_overrides[ft]
+    if override then
+        return format_component(esc(override.icon), override.icon_hl, " ", "")
+            .. format_component(esc(override.name), hl)
     end
 
     local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t")
     if filename == "" then
-        return ""
+        filename = vim.bo.buftype ~= "" and ("[" .. vim.bo.buftype .. "]") or "[No Name]"
     end
 
     local icon, icon_hl = require("mini.icons").get("file", filename)
@@ -235,13 +224,24 @@ M.file_name = function(hl)
         icon_hl = fn_overrides[filename].icon_hl
     end
 
-    return format_component(icon, icon_hl, " ", "") .. format_component(filename, hl)
+    local flags = (vim.bo.modified and " [+]" or "") .. (vim.bo.readonly and " [RO]" or "")
+    local icon_part = icon and icon ~= "" and format_component(esc(tostring(icon)), icon_hl, " ", "") or ""
+    return icon_part .. format_component(esc(filename) .. flags, hl)
 end
 
 --- Buffer count component - show the number of other open buffers
---- @param hl string The highlight group to use
+--- @param hl string|nil The highlight group to use
+--- @return string
 M.other_buffers = function(hl)
-    local other_bufs = require("core.utils").get_buffer_count() - 1
+    local current = vim.api.nvim_get_current_buf()
+    local other_bufs = 0
+
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if buf ~= current and vim.bo[buf].buflisted and vim.bo[buf].buftype ~= "nofile" then
+            other_bufs = other_bufs + 1
+        end
+    end
+
     if other_bufs < 1 then
         return ""
     end
@@ -250,21 +250,16 @@ end
 
 --- Progress component - show percentage of buffer scrolled
 --- @param hl string|nil The highlight group to use
+--- @return string
 M.progress = function(hl)
     return format_component("%2p%%", hl)
 end
 
---- Clock component - show current time
+--- Line and column component
 --- @param hl string|nil The highlight group to use
-M.location = function(hl)
+--- @return string
+M.line_col = function(hl)
     return format_component("%l:%c", hl)
-end
-
---- Clock component - show current time
---- @param hl string|nil The highlight group to use
-M.clock = function(hl)
-    --- @diagnostic disable-next-line: param-type-mismatch
-    return format_component(os.date("%I:%M %p"):gsub("^0", ""), hl)
 end
 
 -- Statusline components
@@ -278,11 +273,11 @@ local components = {
     component("lazy_updates", "String"),
     component("copilot_status"),
     component("search_count", "Directory"),
+    "%<", -- truncate long file names here
     component("file_name", "Normal"),
     component("other_buffers", "Comment"),
     component("progress", "Special"),
-    component("location", "Changed"),
-    component("clock", "Conceal"),
+    component("line_col", "Changed"),
 }
 
 --- Return the statusline as a concatenated string - use with vim.opt.statusline to set

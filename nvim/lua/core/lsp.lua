@@ -8,7 +8,7 @@ vim.diagnostic.config({
     },
 })
 
--- enable all lsp defs in nvim/lsp
+-- enable all lsp definitions in nvim/lsp
 local lsp_dir = vim.fn.stdpath("config") .. "/lsp"
 local servers = {}
 local handle = vim.uv.fs_scandir(lsp_dir)

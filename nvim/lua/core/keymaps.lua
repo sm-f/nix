@@ -17,18 +17,7 @@ local map = function(modes, lhs, rhs, opts)
     end
 end
 
---- Open a non-interactive terminal and run a command. Keeps the current window focused.
----@param cmd string: The command to run
-local function run_non_interactive_cmd(cmd)
-    return function()
-        local win = vim.api.nvim_get_current_win()
-        snacks.terminal.toggle(cmd, { interactive = false })
-        vim.api.nvim_set_current_win(win)
-    end
-end
-
 -- stylua: ignore start
-
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true })
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true })
@@ -107,21 +96,6 @@ map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result
 -- quit
 map("n", "<leader>qq", ":qa<cr>", { desc = "Quit all" })
 
--- windows
-map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
-map("n", "<leader>wd", "<C-W>c", { desc = "Delete window", remap = true })
-map("n", "<leader>w-", "<C-W>s", { desc = "Split window below", remap = true })
-map("n", "<leader>w|", "<C-W>v", { desc = "Split window right", remap = true })
-map("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
-map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
-map("n", "<leader>wz", function() snacks.zen() end, { desc = "Zen mode" })
-
--- tabs
-map("n", "<leader><tab><tab>", ":tabnew<cr>", { desc = "New Tab" })
-map("n", "<leader><tab>l", ":tabnext<cr>", { desc = "Next Tab" })
-map("n", "<leader><tab>d", ":tabclose<cr>", { desc = "Close Tab" })
-map("n", "<leader><tab>h", ":tabprevious<cr>", { desc = "Previous Tab" })
-
 -- Code/LSP
 map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
 map("n", "<leader>cd", function() vim.diagnostic.open_float({border = 'rounded'}) end, { desc = "Line Diagnostics" })
@@ -143,9 +117,4 @@ map({"n", "t"}, "<C-\\>", function() snacks.terminal() end, { desc = "Toggle Ter
 map("n", "<leader>gg", function() snacks.lazygit() end, { desc = "Lazygit" })
 map("n", "<leader>kk", function() utils.open_terminal_toggle({ "k9s" }, true) end, { desc = "K9s" })
 map("n", "<leader>ao", function() utils.open_terminal_toggle({ "pi" }) end, { desc = "pi coding agent" })
-map("n", "<leader>rlf", ":luafile %<cr>", { desc = "Run Current Lua File" })
-map("n", "<leader>rlt", ":PlenaryBustedFile %<cr>", { desc = "Run Lua Test File" })
-map("n", "<leader>rss", run_non_interactive_cmd(vim.fn.expand("%:p")), { desc = "Run shell script" })
-map("n", "<leader>rm", run_non_interactive_cmd("make"), { desc = "Run make" })
-map("n", "<leader>rt", run_non_interactive_cmd("task"), { desc = "Run task" })
 -- stylua: ignore end

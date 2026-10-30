@@ -1,23 +1,5 @@
 local M = {}
 
---- Get highlight properties for a given highlight name
---- @param name string The highlight group name
---- @param fallback? table The fallback highlight properties
---- @return table properties # the highlight group properties
-function M.get_hlgroup(name, fallback)
-    if vim.fn.hlexists(name) == 1 then
-        local group = vim.api.nvim_get_hl(0, { name = name })
-
-        local hl = {
-            fg = group.fg == nil and "NONE" or M.parse_hex(group.fg),
-            bg = group.bg == nil and "NONE" or M.parse_hex(group.bg),
-        }
-
-        return hl
-    end
-    return fallback or {}
-end
-
 --- Switch to the previous buffer
 function M.switch_to_other_buffer()
     -- try alternate buffer first
@@ -47,31 +29,6 @@ function M.get_buffer_count()
         end
     end
     return count
-end
-
---- Parse a given integer color to a hex value.
---- @param int_color number
-function M.parse_hex(int_color)
-    return string.format("#%x", int_color)
-end
-
---- Write a table of lines to a file
---- @param file string Path to the file
---- @param lines table Table of lines to write to the file
-function M.write_to_file(file, lines)
-    if not lines or #lines == 0 then
-        return
-    end
-    local buf = io.open(file, "w")
-    for _, line in ipairs(lines) do
-        if buf ~= nil then
-            buf:write(line .. "\n")
-        end
-    end
-
-    if buf ~= nil then
-        buf:close()
-    end
 end
 
 function M.toggle_global_boolean(option, description)
@@ -126,7 +83,7 @@ function M.restart_lsp()
     for _, client in ipairs(clients) do
         local config = client.config
         local name = client.name
-        client.stop(true)
+        vim.lsp.client.stop(client, true)
         vim.defer_fn(function()
             vim.lsp.start(config)
             vim.notify("LSP restarted: " .. name, vim.log.levels.INFO)
@@ -134,7 +91,7 @@ function M.restart_lsp()
     end
 end
 
---- Open the LSP log file in a readonly split
+--- Open the LSP log file in a read-only split
 function M.open_lsp_log()
     local log_path = vim.lsp.log.get_filename()
     if vim.fn.filereadable(log_path) == 0 then
