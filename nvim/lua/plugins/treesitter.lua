@@ -4,14 +4,18 @@ return {
         local TS = require("nvim-treesitter")
         TS.update(nil, { summary = true })
     end,
-    event = { "BufReadPost", "BufNewFile" },
-    cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
-    opts = {
-        highlight = { enable = true },
-        indent = { enable = true },
-    },
-    config = function(_, opts)
+    lazy = false,
+    config = function()
         local TS = require("nvim-treesitter")
+
+        local group = vim.api.nvim_create_augroup("Treesitter", { clear = true })
+        vim.api.nvim_create_autocmd("FileType", {
+            group = group,
+            callback = function(event)
+                pcall(vim.treesitter.start, event.buf)
+            end,
+            desc = "Start treesitter automatically",
+        })
         local ensure_installed = {
             "bash",
             "bicep",
@@ -49,7 +53,6 @@ return {
             "yaml",
         }
 
-        TS.setup(opts)
         vim.treesitter.language.register("markdown", "mdx")
         local installed = TS.get_installed()
         local to_install = vim.tbl_filter(function(lang)

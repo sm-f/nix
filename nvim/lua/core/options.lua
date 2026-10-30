@@ -22,6 +22,7 @@ opt.scrolloff = 12
 opt.wrap = true
 opt.linebreak = true
 opt.spelllang = "en_nz"
+opt.spell = true
 opt.showtabline = 0
 opt.title = true
 opt.titlestring = "%{fnamemodify(getcwd(), ':t')} - %t"

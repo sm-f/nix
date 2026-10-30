@@ -1,26 +1,8 @@
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
-local utils = require("core.utils")
 
 -- General Settings
 local general = augroup("General Settings", { clear = true })
-
-autocmd("BufEnter", {
-    callback = function()
-        vim.opt.formatoptions:remove({ "c", "r", "o" })
-    end,
-    group = general,
-    desc = "Disable New Line Comment",
-})
-
-autocmd("BufEnter", {
-    pattern = { "*.md", "*.mdx", "*.txt" },
-    callback = function()
-        vim.opt_local.spell = true
-    end,
-    group = general,
-    desc = "Enable spell checking on specific filetypes",
-})
 
 autocmd("FileType", {
     group = general,
@@ -38,31 +20,6 @@ autocmd("FileType", {
             desc = "Quit buffer",
         })
     end,
-})
-
-autocmd("BufEnter", {
-    group = general,
-    callback = function(event)
-        local two_space_indent_types = {
-            "nix",
-        }
-        if vim.tbl_contains(two_space_indent_types, vim.bo[event.buf].filetype) then
-            vim.bo[event.buf].shiftwidth = 2
-            vim.bo[event.buf].tabstop = 2
-            vim.bo[event.buf].softtabstop = 2
-        end
-    end,
-})
-
-autocmd("FileType", {
-    group = general,
-    callback = function(event)
-        local ok = pcall(vim.treesitter.start, event.buf)
-        if not ok then
-            return
-        end
-    end,
-    desc = "Start treesitter automatically",
 })
 
 autocmd("VimEnter", {
@@ -88,20 +45,4 @@ autocmd("StdinReadPre", {
     callback = function()
         vim.g.using_stdin = true
     end,
-})
-
-autocmd("BufEnter", {
-    group = general,
-    callback = vim.schedule_wrap(function(data)
-        if data.buf ~= vim.api.nvim_get_current_buf() then
-            return
-        end
-        local root = utils.find_root(data.buf, { ".git" })
-        if root == nil then
-            return
-        end
-        vim.cmd.lcd(root)
-    end),
-    nested = true,
-    desc = "Find root and change current directory",
 })
