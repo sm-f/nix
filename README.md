@@ -20,7 +20,7 @@
 
 ## Structure
 
-- `modules/` — den aspects (hosts, desktop, services, user)
+- `modules/` — one file per den aspect (almost)
 - `home/` — dotfiles managed by hjem
 - `nvim/` — neovim config
 - `overlays/` — package overlays

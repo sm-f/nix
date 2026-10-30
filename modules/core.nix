@@ -76,7 +76,7 @@
         hardware.graphics.extraPackages = [ pkgs.intel-media-driver ];
 
         nixpkgs.config.allowUnfree = true;
-        nixpkgs.overlays = import ../../overlays;
+        nixpkgs.overlays = import ../overlays;
         boot.kernelPackages = pkgs.linuxPackages_latest;
         system.stateVersion = "26.05";
       };

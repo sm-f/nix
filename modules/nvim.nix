@@ -28,8 +28,8 @@
       };
 
       files = {
-        ".config/nvim".source = utils.mkSymlink pkgs "${../../nvim}";
-        ".local/share/applications/nvim-xdg.desktop".source = ../../home/applications/nvim-xdg.desktop;
+        ".config/nvim".source = utils.mkSymlink pkgs "${../nvim}";
+        ".local/share/applications/nvim-xdg.desktop".source = ../home/applications/nvim-xdg.desktop;
       };
     };
 }

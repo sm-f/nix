@@ -12,17 +12,17 @@ in
     {
       clobberFiles = true;
       files = {
-        ".config/bat/config".source = ../../home/bat/config;
-        ".config/btop/btop.conf".source = ../../home/btop/btop.conf;
-        ".config/git/config".source = ../../home/git/config;
-        ".config/k9s/aliases.yaml".source = ../../home/k9s/aliases.yaml;
-        ".config/k9s/config.yaml".source = ../../home/k9s/config.yaml;
-        ".config/lazygit/config.yml".source = ../../home/lazygit/config.yml;
-        ".config/mimeapps.list".source = ../../home/mimeapps.list;
-        ".local/share/applications/mimeapps.list".source = ../../home/mimeapps.list;
-        ".config/posting/config.yaml".source = ../../home/posting/config.yaml;
-        ".config/starship.toml".source = ../../home/starship.toml;
-        ".config/user-dirs.dirs".source = ../../home/user-dirs.dirs;
+        ".config/bat/config".source = ../home/bat/config;
+        ".config/btop/btop.conf".source = ../home/btop/btop.conf;
+        ".config/git/config".source = ../home/git/config;
+        ".config/k9s/aliases.yaml".source = ../home/k9s/aliases.yaml;
+        ".config/k9s/config.yaml".source = ../home/k9s/config.yaml;
+        ".config/lazygit/config.yml".source = ../home/lazygit/config.yml;
+        ".config/mimeapps.list".source = ../home/mimeapps.list;
+        ".local/share/applications/mimeapps.list".source = ../home/mimeapps.list;
+        ".config/posting/config.yaml".source = ../home/posting/config.yaml;
+        ".config/starship.toml".source = ../home/starship.toml;
+        ".config/user-dirs.dirs".source = ../home/user-dirs.dirs;
 
         # symlinks
         ".config/dms".source = mkSym "${nixDir}/home/dms";
