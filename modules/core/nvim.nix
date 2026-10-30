@@ -1,0 +1,35 @@
+{ utils, ... }:
+{
+  den.aspects.nvim.hjem =
+    { pkgs, ... }:
+    {
+      clobberFiles = true;
+
+      packages = with pkgs; [
+        bash-language-server
+        emmylua-ls
+        gh-markdown-preview
+        neovim
+        nixd
+        nixfmt
+        powershell-editor-services
+        prettier
+        shfmt
+        stylua
+        tree-sitter
+        vscode-langservers-extracted
+        yaml-language-server
+      ];
+
+      environment.sessionVariables = {
+        EDITOR = "nvim";
+        MANPAGER = "nvim +Man!";
+        OBSIDIAN_PATH = "$HOME/Documents/obsidian";
+      };
+
+      files = {
+        ".config/nvim".source = utils.mkSymlink pkgs "${../../nvim}";
+        ".local/share/applications/nvim-xdg.desktop".source = ../../home/applications/nvim-xdg.desktop;
+      };
+    };
+}

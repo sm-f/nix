@@ -1,5 +1,16 @@
 { den, ... }:
 {
+  den.aspects.scott = {
+    includes = [
+      den.provides.define-user
+      den.aspects.dotfiles
+      den.aspects.librewolf
+      den.aspects.nvim
+      den.provides.primary-user
+      (den.provides.user-shell "zsh")
+    ];
+  };
+
   den.aspects.eris = {
     includes = with den.aspects; [
       core
@@ -46,15 +57,5 @@
         nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
         hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
       };
-  };
-
-  den.aspects.scott = {
-    includes = [
-      den.provides.define-user
-      den.aspects.dotfiles
-      den.aspects.librewolf
-      den.provides.primary-user
-      (den.provides.user-shell "zsh")
-    ];
   };
 }

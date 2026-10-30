@@ -20,7 +20,6 @@ in
         ".config/lazygit/config.yml".source = ../../home/lazygit/config.yml;
         ".config/mimeapps.list".source = ../../home/mimeapps.list;
         ".local/share/applications/mimeapps.list".source = ../../home/mimeapps.list;
-        ".local/share/applications/nvim-xdg.desktop".source = ../../home/applications/nvim-xdg.desktop;
         ".config/posting/config.yaml".source = ../../home/posting/config.yaml;
         ".config/starship.toml".source = ../../home/starship.toml;
         ".config/user-dirs.dirs".source = ../../home/user-dirs.dirs;
@@ -29,7 +28,6 @@ in
         ".config/dms".source = mkSym "${nixDir}/home/dms";
         ".config/ghostty".source = mkSym "${nixDir}/home/ghostty";
         ".config/niri".source = mkSym "${nixDir}/home/niri";
-        ".config/nvim".source = mkSym "${nixDir}/nvim";
         ".config/pi".source = mkSym "${nixDir}/home/pi";
 
         # cyberdream themes
