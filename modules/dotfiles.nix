@@ -1,7 +1,6 @@
 { inputs, utils, ... }:
 let
   thm = inputs.cyberdream.extras;
-  nixDir = "/home/scott/git/nix";
 in
 {
   den.aspects.dotfiles.hjem =
@@ -25,10 +24,10 @@ in
         ".config/user-dirs.dirs".source = ../home/user-dirs.dirs;
 
         # symlinks
-        ".config/dms".source = mkSym "${nixDir}/home/dms";
-        ".config/ghostty".source = mkSym "${nixDir}/home/ghostty";
-        ".config/niri".source = mkSym "${nixDir}/home/niri";
-        ".config/pi".source = mkSym "${nixDir}/home/pi";
+        ".config/dms".source = mkSym "home/dms";
+        ".config/ghostty".source = mkSym "home/ghostty";
+        ".config/niri".source = mkSym "home/niri";
+        ".config/pi".source = mkSym "home/pi";
 
         # cyberdream themes
         ".config/dms/themes/cyberdream-muted.json".source = "${thm.dux}/cyberdream-muted.json";

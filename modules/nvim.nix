@@ -2,6 +2,9 @@
 {
   den.aspects.nvim.hjem =
     { pkgs, ... }:
+    let
+      mkSym = utils.mkSymlink pkgs;
+    in
     {
       clobberFiles = true;
 
@@ -28,7 +31,7 @@
       };
 
       files = {
-        ".config/nvim".source = utils.mkSymlink pkgs "${../nvim}";
+        ".config/nvim".source = mkSym "nvim";
         ".local/share/applications/nvim-xdg.desktop".source = ../home/applications/nvim-xdg.desktop;
       };
     };
