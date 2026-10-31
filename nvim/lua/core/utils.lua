@@ -57,12 +57,12 @@ function M.copilot_toggle()
     })
 end
 
---- Open K9s in a fullscreen interactive terminal
+--- Run a cmd in a fullscreen interactive terminal
 ---@param cmd string[] The command to run in the terminal
 --- @param fullscreen? boolean Open the terminal in a fullscreen float
 function M.open_terminal_toggle(cmd, fullscreen)
     local snacks = require("snacks")
-    local opts = fullscreen and { win = { position = "float", width = 0.99, height = 0.99 } } or nil
+    local opts = fullscreen and { win = { position = "float", width = 0, height = 0, border = "none" } } or nil
     snacks.terminal.toggle(cmd, opts)
     if vim.bo.filetype == "snacks_terminal" then
         vim.notify("_Double press `ESC`_ to return to normal mode", 2, { title = cmd[1] })
