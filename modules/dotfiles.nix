@@ -11,7 +11,6 @@ in
     {
       clobberFiles = true;
       files = {
-        ".config/bat/config".source = ../home/bat/config;
         ".config/btop/btop.conf".source = ../home/btop/btop.conf;
         ".config/git/config".source = ../home/git/config;
         ".config/k9s/aliases.yaml".source = ../home/k9s/aliases.yaml;
