@@ -10,6 +10,7 @@
 
       packages = with pkgs; [
         bash-language-server
+        copilot-language-server
         emmylua-ls
         gh-markdown-preview
         neovim

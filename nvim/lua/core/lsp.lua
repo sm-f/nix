@@ -13,6 +13,7 @@ local servers = {
     "bashls",
     "bicep",
     "clangd",
+    "copilot",
     "csharp_ls",
     "emmylua_ls",
     "gopls",
@@ -39,3 +40,4 @@ for _, name in ipairs(servers) do
 end
 
 vim.lsp.enable(enabled)
+vim.lsp.inline_completion.enable(true)

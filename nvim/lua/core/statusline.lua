@@ -146,25 +146,6 @@ M.lazy_updates = function(hl)
     return ""
 end
 
---- Copilot status component - depends on copilot.lua
---- @return string
-M.copilot_status = function()
-    local highlights = {
-        [""] = "Comment",
-        ["Normal"] = "Comment",
-        ["Warning"] = "DiagnosticError",
-        ["InProgress"] = "DiagnosticWarn",
-    }
-
-    local ok, clients = pcall(vim.lsp.get_clients, { name = "copilot", bufnr = 0 })
-    if not (ok and #clients > 0) then
-        return ""
-    end
-
-    local status = require("copilot.status").data.status
-    return format_component(" ", highlights[status])
-end
-
 --- Search count component - show current and total search matches when searching a buffer
 --- @param hl string|nil The highlight group to use
 --- @return string
@@ -271,7 +252,6 @@ local components = {
     "%=", -- mark end of left alignment
     component("status_messages"),
     component("lazy_updates", "String"),
-    component("copilot_status"),
     component("search_count", "Directory"),
     "%<", -- truncate long file names here
     component("file_name", "Normal"),

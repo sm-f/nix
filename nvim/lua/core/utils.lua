@@ -49,21 +49,17 @@ function M.copilot_toggle()
     return require("snacks").toggle({
         name = "Copilot Completion",
         get = function()
-            return not require("copilot.client").is_disabled()
+            return vim.lsp.inline_completion.is_enabled({ bufnr = 0 })
         end,
         set = function(state)
-            if state then
-                require("copilot.command").enable()
-            else
-                require("copilot.command").disable()
-            end
+            vim.lsp.inline_completion.enable(state, { bufnr = 0 })
         end,
     })
 end
 
 --- Open K9s in a fullscreen interactive terminal
 ---@param cmd string[] The command to run in the terminal
---- @param fullscreen? boolean Open ther terminal in a fullscreen float
+--- @param fullscreen? boolean Open the terminal in a fullscreen float
 function M.open_terminal_toggle(cmd, fullscreen)
     local snacks = require("snacks")
     local opts = fullscreen and { win = { position = "float", width = 0.99, height = 0.99 } } or nil
