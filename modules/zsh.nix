@@ -33,6 +33,7 @@
             lla = "eza -la";
             ls = "eza";
             lt = "eza --tree";
+            mt = "sudo modprobe -r hid_multitouch && sudo modprobe hid_multitouch";
             rebuild = "nh os switch .";
             s = "ssh";
           };

@@ -21,6 +21,7 @@
         shfmt
         stylua
         tailwindcss-language-server
+        taplo
         tree-sitter
         vscode-langservers-extracted
         yaml-language-server

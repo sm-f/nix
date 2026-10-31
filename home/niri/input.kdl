@@ -1,5 +1,12 @@
 input {
-    keyboard { xkb { layout "us"; }; }
+    keyboard {
+        xkb {
+            layout "nz(mao)"
+            options "caps:escape"
+        }
+        repeat-delay 250
+        repeat-rate  30
+    }
     focus-follows-mouse max-scroll-amount="0%"
     disable-power-key-handling // see https://github.com/niri-wm/niri/issues/2233
     touchpad {
