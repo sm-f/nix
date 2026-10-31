@@ -1,4 +1,4 @@
-local utils = require("core.utils")
+local utils = require("utils")
 local snacks = require("snacks")
 
 --- Map a key combination to a command
@@ -50,8 +50,11 @@ map("n", "<leader>bd", function() snacks.bufdelete({ wipe = true }) end, { desc 
 map("n", "L", ":bnext<cr>", { desc = "Next buffer" })
 map("n", "H", ":bprevious<cr>", { desc = "Previous buffer" })
 
--- lazy
-map("n", "<leader>l", ":Lazy<cr>", { desc = "Lazy" })
+-- packages
+map("n", "<leader>l", function() vim.pack.update(nil, { force = true }) end, { desc = "Update plugins" })
+map("n", "<leader>L", function()
+    vim.pack.update(nil, { target = "lockfile", offline = true, force = true })
+end, { desc = "Sync plugins to lockfile" })
 
 -- Snacks Picker
 map("n", "<leader><leader>", function() snacks.picker.smart() end, { desc = "Smart Fuzzy Find" })

@@ -1,6 +1,2 @@
-return {
-    "folke/todo-comments.nvim",
-    cmd = "TodoTelescope",
-    event = "BufRead",
-    opts = {},
-}
+pack("https://github.com/folke/todo-comments.nvim")
+require("todo-comments").setup({})

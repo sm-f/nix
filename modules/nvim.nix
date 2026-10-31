@@ -20,6 +20,7 @@
         prettier
         shfmt
         stylua
+        tailwindcss-language-server
         tree-sitter
         vscode-langservers-extracted
         yaml-language-server

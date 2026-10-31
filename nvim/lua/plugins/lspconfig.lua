@@ -1,4 +1,1 @@
-return {
-    "neovim/nvim-lspconfig",
-    lazy = false,
-}
+pack("https://github.com/neovim/nvim-lspconfig")

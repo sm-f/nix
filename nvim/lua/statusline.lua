@@ -135,17 +135,6 @@ M.status_messages = function(hl)
     return ""
 end
 
---- Lazy updates component - show pending lazy.nvim updates
---- @param hl string|nil The highlight group to use
---- @return string
-M.lazy_updates = function(hl)
-    local updates = require("lazy.status").updates()
-    if type(updates) == "string" then
-        return format_component(esc(updates), hl)
-    end
-    return ""
-end
-
 --- Search count component - show current and total search matches when searching a buffer
 --- @param hl string|nil The highlight group to use
 --- @return string
@@ -173,7 +162,6 @@ M.file_name = function(hl)
     local ft_overrides = {
         ["copilot-chat"] = { name = "copilot", icon = "󰚩", icon_hl = "MiniIconsAzure" },
         ["grug-far"] = { name = "grug-far", icon = "", icon_hl = "DiagnosticWarn" },
-        ["lazy"] = { name = "lazy.nvim", icon = "󰒲", icon_hl = "Directory" },
         ["minifiles"] = { name = "files", icon = "󰝰", icon_hl = "Directory" },
         ["snacks_picker_input"] = { name = "picker", icon = "󰦨", icon_hl = "Changed" },
     }
@@ -197,7 +185,13 @@ M.file_name = function(hl)
         filename = vim.bo.buftype ~= "" and ("[" .. vim.bo.buftype .. "]") or "[No Name]"
     end
 
-    local icon, icon_hl = require("mini.icons").get("file", filename)
+    local flags = (vim.bo.modified and " [+]" or "") .. (vim.bo.readonly and " [RO]" or "")
+
+    local ok, mini_icons = pcall(require, "mini.icons")
+    if not ok then
+        return format_component(esc(filename) .. flags, hl)
+    end
+    local icon, icon_hl = mini_icons.get("file", filename)
 
     -- Override or set custom icons
     if fn_overrides[filename] then
@@ -205,7 +199,6 @@ M.file_name = function(hl)
         icon_hl = fn_overrides[filename].icon_hl
     end
 
-    local flags = (vim.bo.modified and " [+]" or "") .. (vim.bo.readonly and " [RO]" or "")
     local icon_part = icon and icon ~= "" and format_component(esc(tostring(icon)), icon_hl, " ", "") or ""
     return icon_part .. format_component(esc(filename) .. flags, hl)
 end
@@ -251,7 +244,6 @@ local components = {
     component("diagnostics"),
     "%=", -- mark end of left alignment
     component("status_messages"),
-    component("lazy_updates", "String"),
     component("search_count", "Directory"),
     "%<", -- truncate long file names here
     component("file_name", "Normal"),

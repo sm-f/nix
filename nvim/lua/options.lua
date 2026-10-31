@@ -29,7 +29,7 @@ opt.titlestring = "%{fnamemodify(getcwd(), ':t')} - %t"
 
 -- Set statusline
 opt.laststatus = 3
-opt.statusline = require("core.statusline").statusline
+opt.statusline = require("statusline").statusline
 
 -- Set tab width
 opt.tabstop = 4
