@@ -152,7 +152,8 @@
       "innerPadding": -6,
       "squareCorners": true,
       "fontScale": 1.2,
-      "hoverPopouts": true
+      "hoverPopouts": true,
+      "noBackground": true
     }
   ],
   "builtInPluginSettings": {
