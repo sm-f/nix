@@ -1,4 +1,9 @@
 ---@diagnostic disable: missing-fields, assign-type-mismatch
+local obsidian_path = os.getenv("OBSIDIAN_PATH")
+if obsidian_path == nil then
+    return
+end
+
 pack("https://github.com/obsidian-nvim/obsidian.nvim")
 require("obsidian").setup({
     attachments = { folder = "attachments", confirm_img_paste = false },

@@ -129,6 +129,7 @@ Ctrl
 ctrl
 cuda
 cURL
+CWD
 cyberdream
 Cython
 dap
@@ -216,6 +217,7 @@ gitlab
 gitmodules
 GitOps
 gitrevisions
+gitsigns
 GitUI
 globbing
 gmail
@@ -508,6 +510,7 @@ SKUs
 smartphone
 soundcloud
 sourceforge
+Spec
 specs
 spinoff
 spotify
@@ -519,12 +522,14 @@ SSD
 SSH
 ssid
 startup
+statusline
 stderr
 stdin
 stdout
 struct
 structs
 stylix
+stylua
 subkey
 subkeys
 sublist

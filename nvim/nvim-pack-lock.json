@@ -58,11 +58,11 @@
       "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "460bb34e7be114f1fda7815781696bc701e60f83",
+      "rev": "d8d2fda7aae57030452ce8cd6e770b1eb704514e",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "a2f694478be07f89c2d03cc17858a8745a400c4b",
+      "rev": "a9c4e1457e2e59f1b82c8f78dcdb3b2517555200",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
