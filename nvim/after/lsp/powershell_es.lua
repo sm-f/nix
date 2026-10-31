@@ -1,4 +1,4 @@
---- @type vim.lsp.Config
+---@type vim.lsp.Config
 return {
     cmd = {
         "powershell-editor-services",
@@ -9,6 +9,6 @@ return {
         vim.fn.stdpath("cache") .. "/powershell_es.session.json",
     },
     filetypes = { "ps1", "psm1" },
-    root_markers = { "PSScriptAnalyzerSettings.psd1", ".git" },
+    init_options = { enableProfileLoading = false },
     settings = { powershell = { codeFormatting = { Preset = "Stroustrup" } } },
 }

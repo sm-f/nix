@@ -8,19 +8,34 @@ vim.diagnostic.config({
     },
 })
 
--- enable all lsp definitions in nvim/lsp
-local lsp_dir = vim.fn.stdpath("config") .. "/lsp"
-local servers = {}
-local handle = vim.uv.fs_scandir(lsp_dir)
-if handle then
-    while true do
-        local name, type = vim.uv.fs_scandir_next(handle)
-        if not name then
-            break
-        end
-        if type == "file" and name:match("%.lua$") then
-            servers[#servers + 1] = name:gsub("%.lua$", "")
-        end
+local servers = {
+    "basedpyright",
+    "bashls",
+    "bicep",
+    "clangd",
+    "csharp_ls",
+    "emmylua_ls",
+    "gopls",
+    "html",
+    "jsonls",
+    "nixd",
+    "ols",
+    "powershell_es",
+    "rust_analyzer",
+    "tailwindcss",
+    "taplo",
+    "templ",
+    "ts_ls",
+    "yamlls",
+}
+
+local enabled = {}
+for _, name in ipairs(servers) do
+    if vim.lsp.config[name] then
+        enabled[#enabled + 1] = name
+    else
+        vim.notify(("[lsp] no config for %q, is nvim-lspconfig installed?"):format(name), vim.log.levels.WARN)
     end
 end
-vim.lsp.enable(servers)
+
+vim.lsp.enable(enabled)

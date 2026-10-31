@@ -54,6 +54,7 @@ return {
         }
 
         vim.treesitter.language.register("markdown", "mdx")
+        vim.treesitter.language.register("bicep", "bicep-params")
         local installed = TS.get_installed()
         local to_install = vim.tbl_filter(function(lang)
             return not vim.tbl_contains(installed, lang)
