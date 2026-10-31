@@ -3,42 +3,6 @@ if not obsidian_path then
     return {}
 end
 
-local function search_tasks()
-    local results = vim.fn.systemlist({
-        "rg",
-        "--no-heading",
-        "--line-number",
-        "--color=never",
-        "--regexp",
-        "^\\s*- \\[ \\]",
-        obsidian_path,
-    })
-    local items = {}
-    for _, line in ipairs(results) do
-        local file, lnum, task = line:match("(.-):(%d+):%s*%- %[%s%] (.*)")
-        if file and lnum then
-            table.insert(items, {
-                file = file,
-                pos = { tonumber(lnum), 0 },
-                text = task,
-                note = vim.fn.fnamemodify(file, ":t:r"),
-            })
-        end
-    end
-    require("snacks").picker({
-        title = "Tasks",
-        items = items,
-        format = function(item)
-            return {
-                { item.note, "Function" },
-                { ":", "Comment" },
-                { tostring(item.pos[1]), "Boolean" },
-                { " " .. item.text, "Normal" },
-            }
-        end,
-    })
-end
-
 return {
     "obsidian-nvim/obsidian.nvim",
     ft = "markdown",
@@ -52,7 +16,6 @@ return {
         { "<leader>ob", "<cmd>Obsidian backlinks<cr>", desc = "Show location list of backlinks" },
         { "<leader>of", "<cmd>Obsidian follow_link<cr>", desc = "Follow link under cursor" },
         { "<leader>op", "<cmd>Obsidian paste_img<cr>", desc = "Paste image from clipboard" },
-        { "<leader>ox", search_tasks, desc = "Search tasks" },
     },
     ---@type obsidian.config
     opts = {
