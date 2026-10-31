@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
     "saghen/blink.cmp",
     event = "InsertEnter",
@@ -10,30 +11,12 @@ return {
             menu = {
                 scrollbar = false,
                 auto_show = true,
-                border = {
-                    { "󱐋", "WarningMsg" },
-                    "─",
-                    "╮",
-                    "│",
-                    "╯",
-                    "─",
-                    "╰",
-                    "│",
-                },
+                border = { { "󱐋", "WarningMsg" }, "─", "╮", "│", "╯", "─", "╰", "│" },
             },
             documentation = {
                 auto_show = true,
                 window = {
-                    border = {
-                        { "", "DiagnosticHint" },
-                        "─",
-                        "╮",
-                        "│",
-                        "╯",
-                        "─",
-                        "╰",
-                        "│",
-                    },
+                    border = { { "", "DiagnosticHint" }, "─", "╮", "│", "╯", "─", "╰", "│" },
                 },
             },
         },
