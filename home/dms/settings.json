@@ -14,7 +14,7 @@
   "appIdSubstitutions": [],
   "clockDateFormat": "ddd d",
   "lockDateFormat": "ddd d",
-  "dankLauncherV2ShowFooter": false,
+  "niriOverviewLauncherStyle": "spotlight",
   "networkPreference": "ethernet",
   "cursorSettings": {
     "theme": "Adwaita",
@@ -358,5 +358,6 @@
   "dmsWindowsFloatingSeeded": [
     "niri"
   ],
-  "m3ElevationEnabled": false
+  "m3ElevationEnabled": false,
+  "batteryAutoPowerSaver": true
 }

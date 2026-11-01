@@ -53,6 +53,14 @@ recent-windows {
     previews {
         max-height 250
     }
+    binds {
+        Alt+Tab          { next-window; }
+        Mod5+Tab         { next-window; }
+        Mod+Tab          { next-window; }
+        Alt+Shift+Tab    { previous-window; }
+        Mod5+Shift+Tab   { previous-window; }
+        Mod+Shift+Tab    { previous-window; }
+    }
 }
 
 blur {

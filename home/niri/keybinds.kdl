@@ -9,7 +9,7 @@ binds {
     Mod+E            { spawn "nautilus"; }
     Mod+R            { spawn-sh "dms ipc call spotlight-bar toggle"; }
     Mod+V            { spawn-sh "dms ipc call clipboard toggle"; }
-    Mod+Alt+L        { spawn-sh "dms ipc call lock lock"; }
+    Mod+Mod5+L       { spawn-sh "dms ipc call lock lock"; }
     Mod+Shift+C      { spawn-sh "dms color pick -a"; }
     Mod+Shift+Escape { spawn-sh "ghostty +new-tab -e btop || ghostty -e btop"; }
     Mod+P            { spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)"; }
@@ -55,8 +55,8 @@ binds {
     Mod+Shift+Ctrl+K { move-column-to-monitor-up; }
     Mod+Shift+Ctrl+L { move-column-to-monitor-right; }
 
-    Mod+Alt+J { move-column-to-workspace-down; }
-    Mod+Alt+K { move-column-to-workspace-up; }
+    Mod+Mod5+J { move-column-to-workspace-down; }
+    Mod+Mod5+K { move-column-to-workspace-up; }
 
     Mod+W                    { toggle-column-tabbed-display; }
     Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
