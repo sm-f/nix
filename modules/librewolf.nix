@@ -42,9 +42,9 @@
       ];
 
       files = {
-        ".librewolf/profiles.ini".source = ../home/librewolf/profiles.ini;
-        ".librewolf/default/user.js".source = ../home/librewolf/user.js;
-        ".librewolf/default/chrome/userChrome.css".source = ../home/librewolf/userChrome.css;
+        ".config/librewolf/librewolf/profiles.ini".source = ../home/librewolf/profiles.ini;
+        ".config/librewolf/librewolf/default/user.js".source = ../home/librewolf/user.js;
+        ".config/librewolf/librewolf/default/chrome/userChrome.css".source = ../home/librewolf/userChrome.css;
       };
     };
 }
