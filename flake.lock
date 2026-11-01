@@ -2,11 +2,11 @@
   "nodes": {
     "cyberdream": {
       "locked": {
-        "lastModified": 1793205263,
-        "narHash": "sha256-CQnEk46wRe9Acu0vElCS5zvtM/hO/NJhI2U3wx9xndc=",
+        "lastModified": 1793502453,
+        "narHash": "sha256-nD2LFT0qPfBUDjnhuMF6NscsMaWCjJ8eaunDVu47p/A=",
         "owner": "scottmckendry",
         "repo": "cyberdream.nvim",
-        "rev": "c75105a726e105f41e8af5e29cd6baed11f4018e",
+        "rev": "8ed987565d081a8ebeda0bac939c22a0f451d074",
         "type": "github"
       },
       "original": {
@@ -57,11 +57,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793433282,
-        "narHash": "sha256-Hb9YM87WXxh9K4KIZ0U5e4M+6POT5hK2mGI5xj/kBXo=",
+        "lastModified": 1793475822,
+        "narHash": "sha256-AtuZOzsb9p+TTzkgaPjvl+5YRsgKc+RlIQMyozOmY5A=",
         "owner": "niri-wm",
         "repo": "niri",
-        "rev": "8e7b5745407294ed37b4b4d8ff4cf4574d45686b",
+        "rev": "a8562a1126922ed4c1c94d34c1dbb26633491d05",
         "type": "github"
       },
       "original": {
@@ -88,11 +88,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1793294725,
-        "narHash": "sha256-loLMnbbS4KhmG2ln9EY6f0YMNCA273Yx02oWYQ9IMeE=",
+        "lastModified": 1793410479,
+        "narHash": "sha256-HzgjxrLY4AEc0044ZuM5CHbLSWLZgDlay1idmzvvpJs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6f06d204d8f2d8761d9da78778745974a3216381",
+        "rev": "fa1373130d5a21c040a47c5dbe1913d59ed91808",
         "type": "github"
       },
       "original": {
