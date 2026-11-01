@@ -1,4 +1,4 @@
-pack("https://github.com/scottmckendry/cyberdream.nvim")
+vim.opt.rtp:prepend(vim.fn.expand("~/git/cyberdream.nvim"))
 require("cyberdream").setup({
     variant = "muted",
     transparent = true,
