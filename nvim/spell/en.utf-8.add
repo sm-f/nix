@@ -50,6 +50,7 @@ autosaved
 autosaves
 backend
 backends
+backport
 backtick
 backtrace
 backtraces
@@ -250,6 +251,7 @@ hardcode
 hashtag
 hashtags
 Heroku
+Hjem
 homebrew
 homelab
 hostname
@@ -398,9 +400,11 @@ neovim
 Nginx
 NixOS
 nixos
+nixpkgs
 noice
 NoSQL
 npm
+Nushell
 nvim
 OAuth
 OAuth2

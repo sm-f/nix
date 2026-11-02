@@ -27,12 +27,6 @@
         yaml-language-server
       ];
 
-      environment.sessionVariables = {
-        EDITOR = "nvim";
-        MANPAGER = "nvim +Man!";
-        OBSIDIAN_PATH = "$HOME/Documents/obsidian";
-      };
-
       files = {
         ".config/nvim".source = mkSym "nvim";
         ".local/share/applications/nvim-xdg.desktop".source = ../home/applications/nvim-xdg.desktop;

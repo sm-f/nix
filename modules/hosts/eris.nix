@@ -7,7 +7,7 @@
       den.aspects.librewolf
       den.aspects.nvim
       den.provides.primary-user
-      (den.provides.user-shell "zsh")
+      (den.provides.user-shell "nushell")
     ];
   };
 
@@ -22,9 +22,9 @@
       niri-session
       packages
       podman
+      shells
       syncthing
       work
-      zsh
     ];
 
     nixos =
