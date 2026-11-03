@@ -169,6 +169,7 @@ M.file_name = function(hl)
     local fn_overrides = {
         ["k9s"] = { icon = "󱃾", icon_hl = "Directory" },
         ["lazygit"] = { icon = "", icon_hl = "Changed" },
+        ["nu"] = { icon = "", icon_hl = "Keyword" },
         ["pi"] = { icon = "󰐀", icon_hl = "MiniIconsAzure" },
         ["zsh"] = { icon = "", icon_hl = "Keyword" },
     }
