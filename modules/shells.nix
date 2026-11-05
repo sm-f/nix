@@ -74,13 +74,6 @@
               symbol = "❄ ";
               format = "via [$symbol ($name)]($style) ";
             };
-
-            custom.nix = {
-              command = "cat ~/.cache/nix-update-status";
-              when = "test -s ~/.cache/nix-update-status";
-              style = "bold yellow";
-              format = "[$symbol$output]($style) ";
-            };
           };
         };
 

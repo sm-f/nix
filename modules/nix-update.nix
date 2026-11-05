@@ -2,11 +2,19 @@
 {
   den.aspects.core = {
     nixos =
-      { pkgs, config, ... }:
+      {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
       let
         user = config.users.users.scott;
         repo = "${user.home}/git/nix";
-        cache = "${user.home}/.cache/nix-update-status";
+        cacheDir = "${user.home}/.cache";
+        statusFile = "${cacheDir}/nix-update-status";
+        lockFile = "${statusFile}.lock";
+        indicator = "";
 
         nix-update-check = pkgs.writeShellApplication {
           name = "nix-update-check";
@@ -18,11 +26,11 @@
           ];
           text = ''
             readonly LOCK="${repo}/flake.lock"
-            readonly CACHE="${cache}"
+            readonly STATUS="${statusFile}"
             tmp=$(mktemp -d)
             trap 'rm -rf "$tmp"' EXIT
 
-            mkdir -p "$(dirname "$CACHE")"
+            mkdir -p "$(dirname "$STATUS")"
             while true; do
               cp "$LOCK" "$tmp/original.lock"
               cp "$tmp/original.lock" "$tmp/updated.lock"
@@ -30,7 +38,7 @@
                 --output-lock-file "$tmp/updated.lock" --refresh
 
               # Serialize publication with the path-triggered cache clear.
-              exec 9>"$CACHE.lock"
+              exec 9>"$STATUS.lock"
               flock 9
               if ! cmp -s "$LOCK" "$tmp/original.lock"; then
                 flock -u 9
@@ -38,11 +46,12 @@
               fi
 
               if cmp -s "$tmp/original.lock" "$tmp/updated.lock"; then
-                rm -f "$CACHE"
+                rm -f "$STATUS"
               else
-                # Publish atomically: starship reads this without the lock.
-                printf '' >"$CACHE.tmp"
-                mv -f "$CACHE.tmp" "$CACHE"
+                # Publish atomically: starship reads this without the lock. Write
+                # the glyph too so older configs that cat the file still work.
+                printf '%s' ${lib.escapeShellArg indicator} >"$STATUS.tmp"
+                mv -f "$STATUS.tmp" "$STATUS"
               fi
               break
             done
@@ -50,6 +59,13 @@
         };
       in
       {
+        programs.starship.settings.custom.nix = {
+          when = "test -e ${lib.escapeShellArg statusFile}";
+          symbol = indicator;
+          style = "bold yellow";
+          format = "[$symbol]($style) ";
+        };
+
         systemd.timers.nix-update-check = {
           description = "Check for flake updates upstream";
           wantedBy = [ "timers.target" ];
@@ -88,10 +104,10 @@
             pkgs.util-linux
           ];
           script = ''
-            mkdir -p ${pkgs.lib.escapeShellArg "${user.home}/.cache"}
-            exec 9>${pkgs.lib.escapeShellArg "${cache}.lock"}
+            mkdir -p ${lib.escapeShellArg cacheDir}
+            exec 9>${lib.escapeShellArg lockFile}
             flock 9
-            rm -f ${pkgs.lib.escapeShellArg cache}
+            rm -f ${lib.escapeShellArg statusFile}
           '';
         };
       };
