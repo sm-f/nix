@@ -49,6 +49,39 @@
         programs.starship = {
           enable = true;
           enableZshIntegration = true;
+          settings = {
+            format = "$all $fill $cmd_duration\n$character";
+
+            fill.symbol = " ";
+            golang.symbol = " ";
+
+            add_newline = true;
+            line_break.disabled = true;
+            git_metrics.disabled = false;
+
+            character = {
+              error_symbol = "[❯](red)";
+              success_symbol = "[❯](green)";
+            };
+
+            cmd_duration = {
+              format = "[$duration](bright-black)";
+              min_time = 10;
+              show_milliseconds = true;
+            };
+
+            nix_shell = {
+              symbol = "❄ ";
+              format = "via [$symbol ($name)]($style) ";
+            };
+
+            custom.nix = {
+              command = "cat ~/.cache/nix-update-status";
+              when = "test -s ~/.cache/nix-update-status";
+              style = "bold yellow";
+              format = "[$symbol$output]($style) ";
+            };
+          };
         };
 
         programs.zoxide = {

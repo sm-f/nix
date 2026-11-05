@@ -19,7 +19,6 @@ in
         ".config/mimeapps.list".source = ../home/mimeapps.list;
         ".local/share/applications/mimeapps.list".source = ../home/mimeapps.list;
         ".config/posting/config.yaml".source = ../home/posting/config.yaml;
-        ".config/starship.toml".source = ../home/starship.toml;
         ".config/user-dirs.dirs".source = ../home/user-dirs.dirs;
 
         # symlinks
