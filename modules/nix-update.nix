@@ -5,31 +5,47 @@
       { pkgs, config, ... }:
       let
         user = config.users.users.scott;
+        repo = "${user.home}/git/nix";
+        cache = "${user.home}/.cache/nix-update-status";
 
         nix-update-check = pkgs.writeShellApplication {
           name = "nix-update-check";
           runtimeInputs = [
+            pkgs.coreutils
             pkgs.diffutils
-            pkgs.jq
             pkgs.nix
+            pkgs.util-linux
           ];
           text = ''
-            readonly REPO_DIR="''${NIX_REPO_DIR:-$HOME/git/nix}"
-            readonly CACHE="''${NIX_UPDATE_CACHE:-$HOME/.cache/nix-update-status}"
+            readonly LOCK="${repo}/flake.lock"
+            readonly CACHE="${cache}"
+            tmp=$(mktemp -d)
+            trap 'rm -rf "$tmp"' EXIT
 
-            resolved=$(mktemp)
-            trap 'rm -f "$resolved"' EXIT
+            mkdir -p "$(dirname "$CACHE")"
+            while true; do
+              cp "$LOCK" "$tmp/original.lock"
+              cp "$tmp/original.lock" "$tmp/updated.lock"
+              nix flake update --flake "${repo}" \
+                --output-lock-file "$tmp/updated.lock" --refresh
 
-            if ! nix flake update --flake "$REPO_DIR" --output-lock-file "$resolved"; then
-              exit 1 # exit with error if flake update fails
-            fi
+              # Serialize publication with the path-triggered cache clear.
+              exec 9>"$CACHE.lock"
+              flock 9
+              if ! cmp -s "$LOCK" "$tmp/original.lock"; then
+                flock -u 9
+                continue
+              fi
 
-            if jq -S . "$REPO_DIR/flake.lock" | cmp -s - <(jq -S . "$resolved"); then
-              rm -f "$CACHE"
-            else
-              mkdir -p "$(dirname "$CACHE")"
-              printf '' >"$CACHE"
-            fi
+              if cmp -s "$tmp/original.lock" "$tmp/updated.lock"; then
+                rm -f "$CACHE"
+              else
+                # Publish atomically: starship reads this without the lock.
+                printf '' >"$CACHE.tmp"
+                mv -f "$CACHE.tmp" "$CACHE"
+              fi
+              break
+            done
           '';
         };
       in
@@ -39,7 +55,7 @@
           wantedBy = [ "timers.target" ];
           timerConfig = {
             OnBootSec = "1min";
-            OnUnitActiveSec = "7min";
+            OnUnitActiveSec = "30min";
           };
         };
 
@@ -50,11 +66,33 @@
             User = user.name;
             ExecStart = "${nix-update-check}/bin/nix-update-check";
             TimeoutStartSec = "5min";
-            Environment = [
-              "HOME=${user.home}"
-              "NIX_REPO_DIR=${user.home}/git/nix"
-            ];
+            Environment = [ "HOME=${user.home}" ];
           };
+        };
+
+        systemd.paths.nix-update-lock-changed = {
+          description = "Watch for local flake lock updates";
+          wantedBy = [ "multi-user.target" ];
+          pathConfig.PathChanged = "${repo}/flake.lock";
+        };
+
+        systemd.services.nix-update-lock-changed = {
+          description = "Clear and refresh flake update status";
+          serviceConfig = {
+            Type = "oneshot";
+            User = user.name;
+            ExecStartPost = "+${config.systemd.package}/bin/systemctl start --no-block nix-update-check.service";
+          };
+          path = [
+            pkgs.coreutils
+            pkgs.util-linux
+          ];
+          script = ''
+            mkdir -p ${pkgs.lib.escapeShellArg "${user.home}/.cache"}
+            exec 9>${pkgs.lib.escapeShellArg "${cache}.lock"}
+            flock 9
+            rm -f ${pkgs.lib.escapeShellArg cache}
+          '';
         };
       };
   };
