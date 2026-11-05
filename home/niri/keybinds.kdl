@@ -32,7 +32,6 @@ binds {
 
     // --- Window/Workspace/Layout ---
     Mod+O repeat=false { toggle-overview; }
-    Mod { release { toggle-overview; }; }
     Mod+Q { close-window; }
 
     Mod+H { focus-column-left; }
