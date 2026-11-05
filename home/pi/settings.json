@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.4.0",
+  "lastChangelogVersion": "1.5.0",
   "theme": "cyberdream-muted",
   "showCacheMissNotices": true,
   "defaultThinkingLevel": "low",
@@ -15,5 +15,8 @@
   "packages": [
     "npm:pi-web-access",
     "/home/scott/git/pi-copium/"
-  ]
+  ],
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.47.0"
+  }
 }
