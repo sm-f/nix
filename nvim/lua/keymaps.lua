@@ -1,28 +1,11 @@
 local utils = require("utils")
 local snacks = require("snacks")
-
---- Map a key combination to a command
----@param modes string|string[]: The mode(s) to map the key combination to
----@param lhs string: The key combination to map
----@param rhs string|function: The command to run when the key combination is pressed
----@param opts table: Options to pass to the keymap
-local map = function(modes, lhs, rhs, opts)
-    local options = { silent = true }
-    options = vim.tbl_extend("force", options, opts)
-    if type(modes) == "string" then
-        modes = { modes }
-    end
-    for _, mode in ipairs(modes) do
-        vim.keymap.set(mode, lhs, rhs, options)
-    end
-end
+local map = utils.map
 
 -- stylua: ignore start
 -- better up/down
-map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true })
-map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true })
-map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true })
-map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true })
+map({ "n", "x" }, { "j", "<Down>" }, "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true })
+map({ "n", "x" }, { "k", "<Up>" }, "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true })
 
 -- Move to window using the <ctrl> hjkl keys
 map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
@@ -96,7 +79,7 @@ map("n", "<leader>cli", ":check lsp<cr>", { desc = "LSP Info" })
 map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
 map("n", "<leader>clr", utils.restart_lsp, { desc = "Restart LSP" })
 map("n", "<leader>cll", utils.open_lsp_log, { desc = "Open LSP Log" })
-map("i", "ł", function() vim.lsp.inline_completion.get() end, { desc = "Accept Inline Completion" })
+map("i", { "ł", "<A-l>" }, function() vim.lsp.inline_completion.get() end, { desc = "Accept Inline Completion" })
 map("n", "K", function() return vim.lsp.buf.hover() end, { desc = "Hover" })
 map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
 map("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature Help" })

@@ -1,6 +1,3 @@
 pack("https://github.com/smoka7/hop.nvim")
 require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
-vim.keymap.set("n", "S", "<cmd>HopChar1<cr>", { desc = "Hop to Character" })
-vim.keymap.set("n", "s", "<cmd>HopWord<cr>", { desc = "Hop to Word" })
-vim.keymap.set("n", "f", "<cmd>HopLineStart<cr>", { desc = "Hop to Line Start" })
-vim.keymap.set("n", "F", "<cmd>HopVertical<cr>", { desc = "Hop Vertically" })
+require("utils").map("n", "f", "<cmd>HopWord<cr>", { desc = "Hop to Word" })

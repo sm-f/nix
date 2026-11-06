@@ -44,9 +44,11 @@ hipatterns.setup({
     },
 })
 
+local map = require("utils").map
+
 require("mini.files").setup()
 
-vim.keymap.set("n", "<leader>ee", function()
+map("n", "<leader>ee", function()
     local path = vim.bo.buftype ~= "nofile" and vim.api.nvim_buf_get_name(0) or nil
     local ok = pcall(require("mini.files").open, path)
     if not ok then

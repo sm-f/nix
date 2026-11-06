@@ -119,4 +119,24 @@ function M.gh_markdown_preview()
     })
 end
 
+--- Map a key combination to a command
+---@param modes string|string[]: The modes to map the key combination to
+---@param lhs string|string[]: The key combinations to map
+---@param rhs string|function: The command to run when the key combination is pressed
+---@param opts? table: Options to pass to the keymap
+function M.map(modes, lhs, rhs, opts)
+    local options = vim.tbl_extend("force", { silent = true }, opts or {})
+    if type(modes) == "string" then
+        modes = { modes }
+    end
+    if type(lhs) == "string" then
+        lhs = { lhs }
+    end
+    for _, mode in ipairs(modes) do
+        for _, key in ipairs(lhs) do
+            vim.keymap.set(mode, key, rhs, options)
+        end
+    end
+end
+
 return M

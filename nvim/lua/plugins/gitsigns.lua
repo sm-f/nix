@@ -1,4 +1,5 @@
 pack("https://github.com/lewis6991/gitsigns.nvim")
+local map = require("utils").map
 require("gitsigns").setup({
     signs = {
         add = { text = "▎" },
@@ -10,16 +11,10 @@ require("gitsigns").setup({
     },
     current_line_blame = true,
     on_attach = function(buffer)
-        local function map(l, r, desc)
-            vim.keymap.set("n", l, r, { buffer = buffer, desc = desc })
-        end
-
-        map("]h", ":Gitsigns next_hunk<CR>", "Next Hunk")
-        map("[h", ":Gitsigns prev_hunk<CR>", "Prev Hunk")
-        map("<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-        map("<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
-        map("<leader>ghS", ":Gitsigns stage_buffer<CR>", "Stage Buffer")
-        map("<leader>ghu", ":Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk")
-        map("<leader>ghR", ":Gitsigns reset_buffer<CR>", "Reset Buffer")
+        map("n", "<leader>ghs", ":Gitsigns stage_hunk<CR>", { buffer = buffer, desc = "stage Hunk" })
+        map("n", "<leader>ghr", ":Gitsigns reset_hunk<CR>", { buffer = buffer, desc = "Reset Hunk" })
+        map("n", "<leader>ghS", ":Gitsigns stage_buffer<CR>", { buffer = buffer, desc = "Stage Buffer" })
+        map("n", "<leader>ghu", ":Gitsigns undo_stage_hunk<CR>", { buffer = buffer, desc = "Undo Stage Hunk" })
+        map("n", "<leader>ghR", ":Gitsigns reset_buffer<CR>", { buffer = buffer, desc = "Reset Buffer" })
     end,
 })

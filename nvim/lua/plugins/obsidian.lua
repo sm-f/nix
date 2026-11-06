@@ -1,4 +1,5 @@
 ---@diagnostic disable: missing-fields, assign-type-mismatch
+local map = require("utils").map
 local obsidian_path = os.getenv("OBSIDIAN_PATH")
 if obsidian_path == nil then
     return
@@ -28,12 +29,11 @@ require("obsidian").setup({
     legacy_commands = false,
 })
 
-vim.keymap.set("n", "<leader>od", "<cmd>Obsidian today<cr>", { desc = "Daily note" })
-vim.keymap.set("n", "<leader>oy", "<cmd>Obsidian yesterday<cr>", { desc = "Daily note" })
-vim.keymap.set("n", "<leader>ot", "<cmd>Obsidian tomorrow<cr>", { desc = "Apply Core Template" })
-vim.keymap.set("n", "<leader>on", "<cmd>Obsidian new_from_template Core<cr>", { desc = "New Obsidian note" })
-vim.keymap.set("n", "<leader>os", "<cmd>Obsidian search<cr>", { desc = "Search Obsidian notes" })
-vim.keymap.set("n", "<leader>oo", "<cmd>Obsidian quick_switch<cr>", { desc = "Quick Switch" })
-vim.keymap.set("n", "<leader>ob", "<cmd>Obsidian backlinks<cr>", { desc = "Show location list of backlinks" })
-vim.keymap.set("n", "<leader>of", "<cmd>Obsidian follow_link<cr>", { desc = "Follow link under cursor" })
-vim.keymap.set("n", "<leader>op", "<cmd>Obsidian paste_img<cr>", { desc = "Paste image from clipboard" })
+map("n", "<leader>od", "<cmd>Obsidian today<cr>", { desc = "Daily note" })
+map("n", "<leader>oy", "<cmd>Obsidian yesterday<cr>", { desc = "Yesterday's note" })
+map("n", "<leader>ot", "<cmd>Obsidian tomorrow<cr>", { desc = "Tomorrow's note" })
+map("n", "<leader>on", "<cmd>Obsidian new_from_template Core<cr>", { desc = "New Obsidian note" })
+map("n", "<leader>os", "<cmd>Obsidian search<cr>", { desc = "Search Obsidian notes" })
+map("n", "<leader>oo", "<cmd>Obsidian quick_switch<cr>", { desc = "Quick Switch" })
+map("n", "<leader>of", "<cmd>Obsidian follow_link<cr>", { desc = "Follow link under cursor" })
+map("n", "<leader>op", "<cmd>Obsidian paste_img<cr>", { desc = "Paste image from clipboard" })
