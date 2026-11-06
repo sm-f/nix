@@ -30,8 +30,8 @@
 
       files = {
         ".config/nvim".source = mkSym "nvim";
-        ".config/pi".source = mkSym "home/pi";
-        ".local/share/applications/nvim-xdg.desktop".source = ../home/applications/nvim-xdg.desktop;
+        ".config/pi".source = mkSym "dotfiles/pi";
+        ".local/share/applications/nvim-xdg.desktop".source = ../dotfiles/applications/nvim-xdg.desktop;
         ".config/pi/themes/cyberdream-muted.json".source =
           "${inputs.cyberdream.extras.pi}/cyberdream-muted.json";
       };

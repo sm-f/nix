@@ -87,8 +87,8 @@
       in
       {
         files = {
-          ".config/dms".source = mkSym "home/dms";
-          ".config/niri".source = mkSym "home/niri";
+          ".config/dms".source = mkSym "dotfiles/dms";
+          ".config/niri".source = mkSym "dotfiles/niri";
           ".config/dms/themes/cyberdream-muted.json".source =
             "${inputs.cyberdream.extras.dux}/cyberdream-muted.json";
         };

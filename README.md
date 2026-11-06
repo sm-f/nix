@@ -21,7 +21,7 @@
 ## Structure
 
 - `modules/` — one file per den aspect (almost)
-- `home/` — dotfiles managed by hjem
+- `dotfiles/` — dotfiles managed by hjem
 - `nvim/` — neovim config
 - `overlays/` — package overlays
 
