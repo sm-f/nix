@@ -18,7 +18,6 @@ in
         ".config/lazygit/config.yml".source = ../home/lazygit/config.yml;
         ".config/mimeapps.list".source = ../home/mimeapps.list;
         ".local/share/applications/mimeapps.list".source = ../home/mimeapps.list;
-        ".config/posting/config.yaml".source = ../home/posting/config.yaml;
         ".config/user-dirs.dirs".source = ../home/user-dirs.dirs;
 
         # symlinks
@@ -34,7 +33,6 @@ in
         ".config/btop/themes/cyberdream.theme".source = "${thm.btop}/cyberdream-muted.theme";
         ".config/k9s/skins/cyberdream.yaml".source = "${thm.k9s}/cyberdream-muted.yml";
         ".config/ghostty/theme.conf".source = "${thm.ghostty}/cyberdream-muted";
-        ".config/posting/themes/cyberdream.yaml".source = "${thm.posting}/cyberdream-muted.yaml";
       };
     };
 }
