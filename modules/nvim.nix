@@ -6,8 +6,6 @@
       mkSym = utils.mkSymlink pkgs;
     in
     {
-      clobberFiles = true;
-
       packages = with pkgs; [
         bash-language-server
         copilot-language-server

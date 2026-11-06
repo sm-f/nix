@@ -32,8 +32,6 @@
       ) extensions;
     in
     {
-      clobberFiles = true;
-
       packages = [
         (pkgs.librewolf.override {
           extraPolicies.ExtensionSettings = extensionSettings;

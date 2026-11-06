@@ -79,6 +79,8 @@
         nixpkgs.overlays = import ../overlays;
         boot.kernelPackages = pkgs.linuxPackages_latest;
         system.stateVersion = "26.05";
+
+        hjem.clobberByDefault = true;
       };
   };
 }

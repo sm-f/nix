@@ -6,7 +6,6 @@ in
   den.aspects.dotfiles.hjem =
     { ... }:
     {
-      clobberFiles = true;
       files = {
         ".config/btop/btop.conf".source = ../dotfiles/btop/btop.conf;
         ".config/git/config".source = ../dotfiles/git/config;
