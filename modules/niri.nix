@@ -25,7 +25,6 @@
           adwaita-icon-theme
           cliphist
           cups-pk-helper
-          ghostty
           libnotify
           libsecret
           playerctl

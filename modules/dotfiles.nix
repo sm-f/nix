@@ -1,13 +1,10 @@
-{ inputs, utils, ... }:
+{ inputs, ... }:
 let
   thm = inputs.cyberdream.extras;
 in
 {
   den.aspects.dotfiles.hjem =
-    { pkgs, ... }:
-    let
-      mkSym = utils.mkSymlink pkgs;
-    in
+    { ... }:
     {
       clobberFiles = true;
       files = {
@@ -20,14 +17,10 @@ in
         ".local/share/applications/mimeapps.list".source = ../home/mimeapps.list;
         ".config/user-dirs.dirs".source = ../home/user-dirs.dirs;
 
-        # symlinks
-        ".config/ghostty".source = mkSym "home/ghostty";
-
         # cyberdream themes
         ".config/bat/themes/cyberdream.tmTheme".source = "${thm.textmate}/cyberdream-muted.tmTheme";
         ".config/btop/themes/cyberdream.theme".source = "${thm.btop}/cyberdream-muted.theme";
         ".config/k9s/skins/cyberdream.yaml".source = "${thm.k9s}/cyberdream-muted.yml";
-        ".config/ghostty/theme.conf".source = "${thm.ghostty}/cyberdream-muted";
       };
     };
 }
