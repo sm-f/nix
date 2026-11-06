@@ -2,14 +2,14 @@
 
 :root {
   --uc-autohide-toolbox-delay: 200ms;
-  --uc-toolbox-rotation: 72deg; /* lower = taller hidden sliver = easier to hit */
+  --uc-toolbox-rotation: 82deg; /* higher = shorter hidden sliver = smaller hover hitbox */
   --wide-tab-width: 248px;
-  --thin-tab-width: 16px; /* collapsed width doubles as the hover hit area */
+  --thin-tab-width: 8px; /* collapsed width doubles as the hover hit area */
   --sidebar-background: var(--lwt-accent-color, #2b2a33);
 }
 
 :root[sizemode="maximized"] {
-  --uc-toolbox-rotation: 80deg;
+  --uc-toolbox-rotation: 86deg;
 }
 
 /* Toolbar auto-hide (MrOtherGuy/firefox-csshacks), minimal implementation */
