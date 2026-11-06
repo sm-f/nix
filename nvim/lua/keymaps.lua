@@ -90,7 +90,7 @@ map("n", "gy", function() snacks.picker.lsp_type_definitions() end, { desc = "Go
 
 -- Terminal/Run...
 map({"n", "t"}, "<C-\\>", function() snacks.terminal() end, { desc = "Toggle Terminal" })
+map({"n", "t"}, "<C-Space>", function() snacks.terminal.toggle({ "pi" }) end, { desc = "pi coding agent" })
 map("n", "<leader>gg", function() utils.open_terminal_toggle({ "lazygit" }, true) end, { desc = "Lazygit" })
 map("n", "<leader>kk", function() utils.open_terminal_toggle({ "k9s" }, true) end, { desc = "K9s" })
-map("n", "<leader>ao", function() utils.open_terminal_toggle({ "pi" }) end, { desc = "pi coding agent" })
 -- stylua: ignore end
