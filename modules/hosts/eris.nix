@@ -2,11 +2,11 @@
 {
   den.aspects.scott = {
     includes = [
-      den.provides.define-user
       den.aspects.dotfiles
       den.aspects.librewolf
       den.aspects.nvim
       den.aspects.voxtype
+      den.provides.define-user
       den.provides.primary-user
       (den.provides.user-shell "nushell")
     ];
@@ -25,7 +25,6 @@
       podman
       shells
       syncthing
-      den.aspects.voxtype
       work
     ];
 
