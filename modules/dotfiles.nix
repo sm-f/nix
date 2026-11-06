@@ -21,14 +21,9 @@ in
         ".config/user-dirs.dirs".source = ../home/user-dirs.dirs;
 
         # symlinks
-        ".config/dms".source = mkSym "home/dms";
         ".config/ghostty".source = mkSym "home/ghostty";
-        ".config/niri".source = mkSym "home/niri";
-        ".config/pi".source = mkSym "home/pi";
 
         # cyberdream themes
-        ".config/dms/themes/cyberdream-muted.json".source = "${thm.dux}/cyberdream-muted.json";
-        ".config/pi/themes/cyberdream-muted.json".source = "${thm.pi}/cyberdream-muted.json";
         ".config/bat/themes/cyberdream.tmTheme".source = "${thm.textmate}/cyberdream-muted.tmTheme";
         ".config/btop/themes/cyberdream.theme".source = "${thm.btop}/cyberdream-muted.theme";
         ".config/k9s/skins/cyberdream.yaml".source = "${thm.k9s}/cyberdream-muted.yml";

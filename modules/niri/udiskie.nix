@@ -1,6 +1,6 @@
 { utils, ... }:
 {
-  den.aspects.niri-session = {
+  den.aspects.udiskie = {
     nixos =
       {
         pkgs,

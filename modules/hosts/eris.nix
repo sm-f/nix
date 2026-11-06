@@ -20,7 +20,6 @@
       intune
       networking
       niri
-      niri-session
       packages
       podman
       shells

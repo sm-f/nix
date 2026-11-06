@@ -1,11 +1,22 @@
-{ inputs, lib, ... }:
+{
+  den,
+  inputs,
+  utils,
+  ...
+}:
 {
   den.aspects.niri = {
+    includes = with den.aspects; [
+      nautilus
+      niri-select-outputs
+      udiskie
+    ];
+
     nixos =
       { pkgs, config, ... }:
       {
         programs.niri = {
-          enable = lib.mkForce true;
+          enable = true;
           package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri;
         };
 
@@ -67,6 +78,20 @@
             comment = "Niri compositor managed by UWSM";
             binPath = "/run/current-system/sw/bin/niri-session";
           };
+        };
+      };
+
+    provides.to-users.hjem =
+      { pkgs, ... }:
+      let
+        mkSym = utils.mkSymlink pkgs;
+      in
+      {
+        files = {
+          ".config/dms".source = mkSym "home/dms";
+          ".config/niri".source = mkSym "home/niri";
+          ".config/dms/themes/cyberdream-muted.json".source =
+            "${inputs.cyberdream.extras.dux}/cyberdream-muted.json";
         };
       };
   };

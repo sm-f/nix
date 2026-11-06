@@ -1,4 +1,4 @@
-{ utils, ... }:
+{ utils, inputs, ... }:
 {
   den.aspects.nvim.hjem =
     { pkgs, ... }:
@@ -16,6 +16,7 @@
         neovim
         nixd
         nixfmt
+        pi-coding-agent
         powershell-editor-services
         prettier
         shfmt
@@ -29,7 +30,10 @@
 
       files = {
         ".config/nvim".source = mkSym "nvim";
+        ".config/pi".source = mkSym "home/pi";
         ".local/share/applications/nvim-xdg.desktop".source = ../home/applications/nvim-xdg.desktop;
+        ".config/pi/themes/cyberdream-muted.json".source =
+          "${inputs.cyberdream.extras.pi}/cyberdream-muted.json";
       };
     };
 }
