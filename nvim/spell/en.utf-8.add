@@ -107,6 +107,7 @@ colors
 colorscheme
 colorschemes
 colourschemes
+com
 commandline
 compton
 COMPUSEC
@@ -159,6 +160,8 @@ dirs
 Django
 DLL
 dmesg
+DMS
+dms
 DNS
 dns
 dockerfile
@@ -206,6 +209,7 @@ fullscreen
 func
 fzf
 gcc
+ghostty
 gif
 gitattributes
 gitcommit
@@ -255,6 +259,7 @@ Hjem
 homebrew
 homelab
 hostname
+Hotkey
 https
 hypervisor
 IaC
@@ -307,6 +312,7 @@ jupyter
 K3s
 kanban
 kde
+kdl
 KeePass
 keepass
 keepassxc
@@ -398,6 +404,7 @@ NAS
 Neovim
 neovim
 Nginx
+niri
 NixOS
 nixos
 nixpkgs
@@ -433,6 +440,7 @@ phishing
 picom
 PID
 pid
+PiP
 pip3
 pipelining
 pkgconfig
@@ -462,6 +470,7 @@ proc
 Prometheus
 Proxmox
 ps1
+PSR
 pylint
 python3
 PyTorch
@@ -482,6 +491,7 @@ Redux
 refactor
 refractor
 regex
+Remmina
 reparse
 reparsing
 REPL
@@ -494,6 +504,7 @@ RStudio
 runbook
 runtimepath
 rustup
+screencast
 screenshot
 screenshots
 scrollback
@@ -608,6 +619,7 @@ virtualenv
 VM
 VMs
 VPS
+VRR
 VueJS
 warmup
 wasm
@@ -632,6 +644,7 @@ Windots
 winget
 WIP
 WireShark
+wm
 workflow
 WSL
 www

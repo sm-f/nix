@@ -14,7 +14,7 @@ window-padding-y = 10
 background-opacity = 0.85
 background-blur = true
 
-# Window behavior
+# Window behaviour
 gtk-single-instance = true
 focus-follows-mouse = true
 confirm-close-surface = false

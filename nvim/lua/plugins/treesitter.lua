@@ -27,6 +27,7 @@ local ensure_installed = {
     "bicep",
     "c_sharp",
     "css",
+    "desktop",
     "gitignore",
     "go",
     "gomod",
