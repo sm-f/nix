@@ -1,3 +1,4 @@
+{ inputs }:
 let
   # Dynamically import all overlay files in this directory
   overlayFiles = builtins.filter (
@@ -5,4 +6,4 @@ let
   ) (builtins.attrNames (builtins.readDir ./.));
 in
 # Return a list of overlays for composeManyExtensions
-map (file: import (./. + "/${file}")) overlayFiles
+map (file: import (./. + "/${file}") { inherit inputs; }) overlayFiles

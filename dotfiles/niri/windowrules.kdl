@@ -1,23 +1,32 @@
-// --- Rounded corners for all windows ---
+// Rounded corners for all windows
 window-rule {
     geometry-corner-radius 6
     clip-to-geometry true
 }
 
-// --- Remove border background from transparent windows ---
+// Remove border background from transparent windows
 window-rule {
     draw-border-with-background false
 }
 
-// --- Floating windows: always floating ---
+// Floating windows: always floating
 window-rule {
     match title=r#"(?i)^picture-in-picture$"# // PiP windows
     match app-id=r#"(?i)^org.remmina.Remmina$"# title=r#"^Remmina Remote Desktop Client$"# // Remmina (main window only)
-    match app-id=r#"(?i)(nautilus|blueman|pavucontrol|keepass|nm-connection-editor|waypaper|com.network.manager)"# // always floating apps regardless of window title
+    match app-id=r#"(?i)(keepass)"#
     open-floating true
 }
 
-// Indicate screencasted windows with red colors.
+
+// Open Dux Labs Files with a fixed size
+window-rule {
+    match app-id=r#"^dev\.duxlabs\.files$"#
+    default-column-width { fixed 900; }
+    default-window-height { fixed 600; }
+    open-floating true
+}
+
+// Indicate screencast windows with red colors
 window-rule {
     match is-window-cast-target=true
     border {
@@ -26,7 +35,7 @@ window-rule {
     }
 }
 
-// --- Wallpaper stays in place when switching workspaces ---
+// Wallpaper stays in place when switching workspaces
 layer-rule {
     match namespace="quickshell"
     place-within-backdrop true

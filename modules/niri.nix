@@ -7,12 +7,7 @@
 }:
 {
   den.aspects.niri = {
-    includes = with den.aspects; [
-      nautilus
-      niri-select-outputs
-      udiskie
-    ];
-
+    includes = [ den.aspects.niri-select-outputs ];
     nixos =
       { pkgs, config, ... }:
       {
@@ -35,12 +30,16 @@
           xwayland-satellite
         ];
 
+        services.gvfs.enable = true;
         services.upower.enable = true;
         services.udisks2.enable = true;
+
         programs.dux-files.enable = true;
+        programs.dux-files.systemd.enable = true;
         programs.dux-search.enable = true;
         programs.dux-shell.enable = true;
         programs.dux-shell.systemd.enable = true;
+
         services.displayManager.dux-greeter = {
           enable = true;
           compositor.name = "niri";
@@ -88,6 +87,7 @@
       in
       {
         files = {
+          ".config/dfiles".source = mkSym "dotfiles/dfiles";
           ".config/dms".source = mkSym "dotfiles/dms";
           ".config/niri".source = mkSym "dotfiles/niri";
           ".config/dms/themes/cyberdream.json".source = theme.dux;

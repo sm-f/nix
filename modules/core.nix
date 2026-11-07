@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 {
   den.aspects.core = {
     nixos =
@@ -76,7 +76,7 @@
         hardware.graphics.extraPackages = [ pkgs.intel-media-driver ];
 
         nixpkgs.config.allowUnfree = true;
-        nixpkgs.overlays = import ../overlays;
+        nixpkgs.overlays = import ../overlays { inherit inputs; };
         boot.kernelPackages = pkgs.linuxPackages_latest;
         system.stateVersion = "26.05";
 

@@ -6,7 +6,7 @@ binds {
     Mod+Shift+S      { spawn-sh "dms screenshot"; }
     Mod+RETURN       { spawn "ghostty"; }
     Mod+B            { spawn "librewolf"; }
-    Mod+E            { spawn "nautilus"; }
+    Mod+E            { spawn "dfiles"; }
     Mod+R            { spawn-sh "dms ipc call spotlight-bar toggle"; }
     Mod+V            { spawn-sh "dms ipc call clipboard toggle"; }
     Mod+Mod5+L       { spawn-sh "dms ipc call lock lock"; }

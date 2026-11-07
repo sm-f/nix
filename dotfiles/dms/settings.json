@@ -1,7 +1,7 @@
 {
   "currentThemeName": "custom",
   "currentThemeCategory": "custom",
-  "customThemeFile": "/home/scott/.config/dms/themes/cyberdream-muted.json",
+  "customThemeFile": "/home/scott/.config/dms/themes/cyberdream.json",
   "matugenScheme": "scheme-neutral",
   "floatingWindowSyncGlobal": false,
   "floatingWindowForegroundLayers": false,
@@ -153,7 +153,8 @@
       "squareCorners": true,
       "fontScale": 1.2,
       "hoverPopouts": true,
-      "noBackground": true
+      "noBackground": true,
+      "widgetPadding": 5
     }
   ],
   "builtInPluginSettings": {
@@ -359,5 +360,7 @@
     "niri"
   ],
   "m3ElevationEnabled": false,
-  "batteryAutoPowerSaver": true
+  "batteryAutoPowerSaver": true,
+  "density": "dense",
+  "controlCenterIconScale": 0.75
 }
