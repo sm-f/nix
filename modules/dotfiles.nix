@@ -8,12 +8,9 @@ in
     {
       files = {
         ".config/btop/btop.conf".source = ../dotfiles/btop/btop.conf;
-        ".config/git/config".source = ../dotfiles/git/config;
         ".config/k9s/aliases.yaml".source = ../dotfiles/k9s/aliases.yaml;
         ".config/k9s/config.yaml".source = ../dotfiles/k9s/config.yaml;
-        ".config/lazygit/config.yml".source = ../dotfiles/lazygit/config.yml;
         ".config/mimeapps.list".source = ../dotfiles/mimeapps.list;
-        ".local/share/applications/mimeapps.list".source = ../dotfiles/mimeapps.list;
         ".config/user-dirs.dirs".source = ../dotfiles/user-dirs.dirs;
 
         # cyberdream themes

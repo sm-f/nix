@@ -3,6 +3,7 @@
   den.aspects.scott = {
     includes = [
       den.aspects.dotfiles
+      den.aspects.git
       den.aspects.ghostty
       den.aspects.librewolf
       den.aspects.nvim
