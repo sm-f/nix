@@ -4,24 +4,6 @@
     nixos =
       { pkgs, config, ... }:
       {
-        # TODO: Remove this workaround once nixpkgs includes the upstream fix:
-        # https://github.com/NixOS/nixpkgs/pull/583197
-        # The module overrides `evdi`, but the package now accepts `linuxPackages`.
-        nixpkgs.overlays = [
-          (final: prev: {
-            displaylink = prev.lib.makeOverridable (
-              {
-                evdi ? final.linuxPackages.evdi,
-              }:
-              prev.displaylink.override {
-                linuxPackages = final.linuxPackages // {
-                  inherit evdi;
-                };
-              }
-            ) { };
-          })
-        ];
-
         boot = {
           extraModulePackages = [ config.boot.kernelPackages.evdi ];
           kernelModules = [ "evdi" ];
