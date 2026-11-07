@@ -1,7 +1,4 @@
-{ inputs, ... }:
-let
-  thm = inputs.cyberdream.extras;
-in
+{ theme, ... }:
 {
   den.aspects.dotfiles.hjem =
     { ... }:
@@ -14,9 +11,9 @@ in
         ".config/user-dirs.dirs".source = ../dotfiles/user-dirs.dirs;
 
         # cyberdream themes
-        ".config/bat/themes/cyberdream.tmTheme".source = "${thm.textmate}/cyberdream-muted.tmTheme";
-        ".config/btop/themes/cyberdream.theme".source = "${thm.btop}/cyberdream-muted.theme";
-        ".config/k9s/skins/cyberdream.yaml".source = "${thm.k9s}/cyberdream-muted.yml";
+        ".config/bat/themes/cyberdream.tmTheme".source = theme.textmate;
+        ".config/btop/themes/cyberdream.theme".source = theme.btop;
+        ".config/k9s/skins/cyberdream.yaml".source = theme.k9s;
       };
     };
 }

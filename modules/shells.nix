@@ -1,4 +1,4 @@
-{ ... }:
+{ theme, ... }:
 {
   den.aspects.shells = {
     nixos =
@@ -17,6 +17,7 @@
 
         environment.sessionVariables = {
           BUN_INSTALL = "${config.users.users.scott.home}/.local/share/bun";
+          CYBERDREAM_VARIANT = theme.variant;
           DOCKER_CONFIG = "${config.users.users.scott.home}/.config/docker";
           EDITOR = "nvim";
           GOPATH = "${config.users.users.scott.home}/.local/share/go";

@@ -1,6 +1,7 @@
 {
   den,
   inputs,
+  theme,
   utils,
   ...
 }:
@@ -89,8 +90,7 @@
         files = {
           ".config/dms".source = mkSym "dotfiles/dms";
           ".config/niri".source = mkSym "dotfiles/niri";
-          ".config/dms/themes/cyberdream-muted.json".source =
-            "${inputs.cyberdream.extras.dux}/cyberdream-muted.json";
+          ".config/dms/themes/cyberdream.json".source = theme.dux;
         };
       };
   };

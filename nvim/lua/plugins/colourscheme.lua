@@ -1,6 +1,6 @@
 vim.opt.rtp:prepend(vim.fn.expand("~/git/cyberdream.nvim"))
 require("cyberdream").setup({
-    variant = "muted",
+    variant = vim.env.CYBERDREAM_VARIANT or "muted",
     transparent = true,
     italic_comments = true,
     hide_fillchars = true,

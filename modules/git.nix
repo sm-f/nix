@@ -1,4 +1,4 @@
-{ inputs, lib, ... }:
+{ theme, lib, ... }:
 {
   den.aspects.git.hjem =
     { pkgs, ... }:
@@ -43,7 +43,7 @@
         pkgs.runCommandLocal "lazygit-config.yml"
           {
             baseConfig = pkgs.writeText "lazygit-base.yml" (lib.generators.toYAML { } lazygitConfig);
-            theme = "${inputs.cyberdream.extras.lazygit}/cyberdream-muted.yml";
+            theme = theme.lazygit;
             nativeBuildInputs = [ pkgs.yq-go ];
           }
           ''
