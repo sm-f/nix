@@ -1,16 +1,9 @@
-{ inputs, ... }:
+{ ... }:
 {
   den.aspects.work = {
     nixos =
       { pkgs, ... }:
       let
-        stablePkgs = inputs.nixpkgs-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-
-        azure-cli = stablePkgs.azure-cli;
-        azure-functions-core-tools = stablePkgs.azure-functions-core-tools;
-        bicep = stablePkgs.bicep;
-        libreoffice = stablePkgs.libreoffice;
-
         dotnet-combined =
           with pkgs.dotnetCorePackages;
           combinePackages [
