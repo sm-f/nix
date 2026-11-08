@@ -28,6 +28,10 @@
           mouseEvents = false;
           nerdFontsVersion = "3";
         };
+        os = {
+          open = "xdg-open {{filename}}";
+          openLink = "xdg-open {{link}}";
+        };
         git = {
           diffRenderers = [
             {
