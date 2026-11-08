@@ -11,6 +11,7 @@
         copilot-language-server
         emmylua-ls
         gh-markdown-preview
+        imagemagick
         neovim
         nixd
         nixfmt
