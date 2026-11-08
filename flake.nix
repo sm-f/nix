@@ -19,6 +19,10 @@
       url = "github:vic/den";
     };
 
+    neovim-nightly = {
+      url = "github:nix-community/neovim-nightly-overlay";
+    };
+
     niri = {
       url = "github:niri-wm/niri";
       inputs.nixpkgs.follows = "nixpkgs";

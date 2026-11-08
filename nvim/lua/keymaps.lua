@@ -34,8 +34,8 @@ map("n", "L", ":bnext<cr>", { desc = "Next buffer" })
 map("n", "H", ":bprevious<cr>", { desc = "Previous buffer" })
 
 -- vim.pack
-map("n", "<leader>l", function() vim.pack.update(nil) end, { desc = "Update plugins" })
-map("n", "<leader>L", function() vim.pack.update(nil, { target = "lockfile", offline = true }) end, { desc = "Sync plugins to lockfile" })
+map("n", "<leader>l", ":packdel ++all | packupdate<cr>", { desc = "Update plugins" })
+map("n", "<leader>L", ":packupdate ++offline ++lockfile<cr>", { desc = "Sync plugins to lockfile" })
 
 -- Snacks Picker
 map("n", "<leader><leader>", function() snacks.picker.smart() end, { desc = "Smart Fuzzy Find" })
