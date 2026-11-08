@@ -87,10 +87,4 @@ map("n", "gr", function() snacks.picker.lsp_references() end, { desc = "Goto Ref
 map("n", "gI", function() snacks.picker.lsp_implementations() end, { desc = "Goto Implementations" })
 map("n", "gd", function() snacks.picker.lsp_definitions() end, { desc = "Goto Definitions" })
 map("n", "gy", function() snacks.picker.lsp_type_definitions() end, { desc = "Goto Type Definitions" })
-
--- Terminal/Run...
-map({"n", "t"}, "<C-\\>", function() snacks.terminal() end, { desc = "Toggle Terminal" })
-map({"n", "t"}, "<C-Space>", function() snacks.terminal.toggle({ "pi" }) end, { desc = "pi coding agent" })
-map("n", "<leader>gg", function() utils.open_terminal_toggle({ "lazygit" }, true) end, { desc = "Lazygit" })
-map("n", "<leader>kk", function() utils.open_terminal_toggle({ "k9s" }, true) end, { desc = "K9s" })
 -- stylua: ignore end

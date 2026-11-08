@@ -14,6 +14,9 @@ window-padding-y = 10
 background-opacity = 0.85
 background-blur = true
 
+# dogfooding haunt
+command = /home/scott/git/haunt/target/release/haunt
+
 # Window behaviour
 gtk-single-instance = true
 focus-follows-mouse = true

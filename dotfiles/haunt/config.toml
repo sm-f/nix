@@ -1,0 +1,27 @@
+# config for haunt
+# https://github.com/scottmckendry/haunt
+shell = ["nu"]
+
+[[app]]
+name = "pi"
+bind = "ctrl+space"
+cmd = ["pi"]
+size = "half"
+
+[[app]]
+name = "lazygit"
+bind = "ctrl+g"
+cmd = ["lazygit"]
+size = "full"
+
+[[app]]
+name = "k9s"
+bind = "ctrl+k"
+cmd = ["k9s"]
+size = "full"
+
+[[app]]
+name = "term"
+bind = "ctrl+\\"
+cmd = ["nu"]
+size = "half"
