@@ -115,7 +115,7 @@
             ls = "eza --icons=auto --git --group-directories-first";
             lt = "eza --tree --level=2 --icons=auto --git --group-directories-first";
             mt = "sudo modprobe -r hid_multitouch && sudo modprobe hid_multitouch";
-            rebuild = "nh os switch ${config.users.users.scott.home}/git/nix";
+            rebuild = "nh os switch";
             s = "ssh";
             v = "nvim";
             vi = "nvim";
@@ -139,7 +139,7 @@
             $env.config.show_banner = "false"
 
             alias cat = bat
-            alias rebuild = nh os switch ${config.users.users.scott.home}/git/nix
+            alias rebuild = nh os switch
             alias s = ssh
             alias v = nvim
             alias vi = nvim

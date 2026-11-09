@@ -2,7 +2,7 @@
 {
   den.aspects.core = {
     nixos =
-      { pkgs, ... }:
+      { pkgs, config, ... }:
       {
         nix.settings = {
           warn-dirty = false;
@@ -67,6 +67,7 @@
         };
         programs.nh = {
           enable = true;
+          flake = "${config.users.users.scott.home}/git/nix";
           clean.enable = true;
           clean.extraArgs = "--keep-since 4d --keep 3";
         };
