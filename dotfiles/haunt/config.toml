@@ -3,6 +3,18 @@
 shell = ["nu"]
 
 [[app]]
+name = "scratch terminal"
+bind = "ctrl+\\"
+cmd = ["nu"]
+size = "half"
+
+[[app]]
+name = "secondary terminal"
+bind = "ctrl+~"
+cmd = ["nu"]
+size = "half"
+
+[[app]]
 name = "pi"
 bind = "ctrl+space"
 cmd = ["pi"]
@@ -19,9 +31,3 @@ name = "k9s"
 bind = "ctrl+k"
 cmd = ["k9s"]
 size = "full"
-
-[[app]]
-name = "term"
-bind = "ctrl+\\"
-cmd = ["nu"]
-size = "half"
