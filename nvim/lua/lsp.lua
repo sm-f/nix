@@ -32,11 +32,7 @@ local servers = {
 
 local enabled = {}
 for _, name in ipairs(servers) do
-    if vim.lsp.config[name] then
-        enabled[#enabled + 1] = name
-    else
-        vim.notify(("[lsp] no config for %q, is nvim-lspconfig installed?"):format(name), vim.log.levels.WARN)
-    end
+    enabled[#enabled + 1] = name
 end
 
 vim.lsp.enable(enabled)
