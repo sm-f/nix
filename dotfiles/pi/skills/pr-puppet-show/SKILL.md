@@ -22,7 +22,7 @@ Fetches the current PR number, then reviews and addresses unresolved review thre
 2. Fetch review threads with variables. Keep query balanced; pass `number` with `-F` so GraphQL receives an integer:
 
    ```bash
-   gh api graphql -F owner="$owner" -F name="$name" -F number="$pr_number" -f query='query($owner: String!, $name: String!, $number: Int!) { repository(owner: $owner, name: $name) { pullRequest(number: $number) { reviewThreads(first: 100) { nodes { id isResolved path line originalLine comments(first: 100) { nodes { id author { login } body createdAt url } } } } } } }'
+   gh api graphql -F owner="$owner" -F name="$name" -F number="$pr_number" -f query='query($owner: String!, $name: String!, $number: Int!) { repository(owner: $owner, name: $name) { pullRequest(number: $number) { reviewThreads(first: 100) { nodes { id isResolved path line originalLine comments(first: 100) { nodes { id author { login } body createdAt url } } } } } }'
    ```
 
 3. For each unresolved thread:
