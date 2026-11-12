@@ -7,7 +7,6 @@
       den.aspects.ghostty
       den.aspects.librewolf
       den.aspects.nvim
-      den.aspects.voxtype
       den.provides.define-user
       den.provides.primary-user
       (den.provides.user-shell "nushell")

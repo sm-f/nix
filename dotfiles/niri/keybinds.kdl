@@ -13,7 +13,6 @@ binds {
     Mod+Shift+C      { spawn-sh "dms color pick -a"; }
     Mod+Shift+Escape { spawn-sh "ghostty +new-tab -e btop || ghostty -e btop"; }
     Mod+P            { spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)"; }
-    Mod+Y            { press { spawn-sh "voxtype record start"; }; release { spawn-sh "voxtype record stop"; }; }
 
     // --- System Actions ---
     Mod+Shift+P { power-off-monitors; }
