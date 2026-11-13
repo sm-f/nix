@@ -1,7 +1,4 @@
-let
-  repoRoot = "/home/scott/git/nix";
-in
 {
-  mkSymlink = import ./mk-symlink.nix repoRoot;
+  mkSymlink = import ./mk-symlink.nix;
   mkWaylandService = import ./mk-wayland-service.nix;
 }

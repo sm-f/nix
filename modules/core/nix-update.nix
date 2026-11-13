@@ -1,16 +1,17 @@
 { ... }:
 {
-  den.aspects.core = {
+  den.aspects.nix-update = {
     nixos =
       {
         config,
+        host,
         lib,
         pkgs,
         ...
       }:
       let
-        user = config.users.users.scott;
-        repo = "${user.home}/git/nix";
+        user = config.users.users.${host.settings.fleet.primaryUser};
+        repo = host.settings.fleet.repoRoot;
         cacheDir = "${user.home}/.cache";
         statusFile = "${cacheDir}/nix-update-status";
         lockFile = "${statusFile}.lock";

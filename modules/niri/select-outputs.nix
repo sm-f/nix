@@ -3,13 +3,14 @@
   den.aspects.niri-select-outputs = {
     nixos =
       {
-        pkgs,
         config,
+        host,
         lib,
+        pkgs,
         ...
       }:
       let
-        dir = "${config.users.users.scott.home}/.config/niri";
+        dir = "${config.users.users.${host.settings.fleet.primaryUser}.home}/.config/niri";
         niri-select-outputs = pkgs.writeShellApplication {
           name = "niri-select-outputs";
           runtimeInputs = [ pkgs.usbutils ];

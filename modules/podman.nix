@@ -2,7 +2,7 @@
 {
   den.aspects.podman = {
     nixos =
-      { pkgs, ... }:
+      { host, pkgs, ... }:
       {
         environment = {
           systemPackages = [ pkgs.docker-compose ];
@@ -24,7 +24,7 @@
           defaultNetwork.settings.dns_enabled = true;
         };
 
-        users.users.scott = {
+        users.users.${host.settings.fleet.primaryUser} = {
           # Subuid/subgid ranges for rootless userns mapping
           subUidRanges = [
             {

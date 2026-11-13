@@ -2,13 +2,16 @@
 {
   den.aspects.syncthing = {
     nixos =
-      { config, ... }:
+      { config, host, ... }:
+      let
+        user = host.settings.fleet.primaryUser;
+      in
       {
         services.syncthing = {
           enable = true;
-          user = "scott";
+          user = user;
           group = "users";
-          dataDir = "${config.users.users.scott.home}/Documents/syncthing";
+          dataDir = "${config.users.users.${user}.home}/Documents/syncthing";
         };
       };
   };

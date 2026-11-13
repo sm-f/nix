@@ -4,10 +4,14 @@
     nixos =
       {
         config,
+        host,
         lib,
         pkgs,
         ...
       }:
+      let
+        home = config.users.users.${host.settings.fleet.primaryUser}.home;
+      in
       {
         environment.shells = [ pkgs.nushell ];
         environment.systemPackages = [
@@ -16,18 +20,18 @@
         ];
 
         environment.sessionVariables = {
-          BUN_INSTALL = "${config.users.users.scott.home}/.local/share/bun";
+          BUN_INSTALL = "${home}/.local/share/bun";
           CYBERDREAM_VARIANT = theme.variant;
-          DOCKER_CONFIG = "${config.users.users.scott.home}/.config/docker";
+          DOCKER_CONFIG = "${home}/.config/docker";
           EDITOR = "nvim";
-          GOPATH = "${config.users.users.scott.home}/.local/share/go";
-          KUBECONFIG = "${config.users.users.scott.home}/.config/kube/config";
+          GOPATH = "${home}/.local/share/go";
+          KUBECONFIG = "${home}/.config/kube/config";
           MANPAGER = "nvim +Man!";
-          NPM_CONFIG_CACHE = "${config.users.users.scott.home}/.cache/npm";
-          NUGET_PACKAGES = "${config.users.users.scott.home}/.local/share/nuget";
-          OBSIDIAN_PATH = "${config.users.users.scott.home}/Documents/obsidian";
-          PI_CODING_AGENT_DIR = "${config.users.users.scott.home}/.config/pi";
-          TALOSCONFIG = "${config.users.users.scott.home}/.config/talos/config";
+          NPM_CONFIG_CACHE = "${home}/.cache/npm";
+          NUGET_PACKAGES = "${home}/.local/share/nuget";
+          OBSIDIAN_PATH = "${home}/Documents/obsidian";
+          PI_CODING_AGENT_DIR = "${home}/.config/pi";
+          TALOSCONFIG = "${home}/.config/talos/config";
           ZDOTDIR = "/etc/zsh";
         };
 

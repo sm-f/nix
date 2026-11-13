@@ -1,9 +1,9 @@
 { theme, utils, ... }:
 {
   den.aspects.ghostty.hjem =
-    { pkgs, ... }:
+    { host, pkgs, ... }:
     let
-      mkSym = utils.mkSymlink pkgs;
+      mkSym = utils.mkSymlink host.settings.fleet.repoRoot pkgs;
     in
     {
       packages = [ pkgs.ghostty ];

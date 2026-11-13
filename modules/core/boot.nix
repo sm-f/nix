@@ -1,6 +1,6 @@
 { ... }:
 {
-  den.aspects.core = {
+  den.aspects.boot = {
     nixos =
       { pkgs, ... }:
       {

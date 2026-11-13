@@ -1,9 +1,9 @@
 { utils, theme, ... }:
 {
   den.aspects.nvim.hjem =
-    { pkgs, ... }:
+    { host, pkgs, ... }:
     let
-      mkSym = utils.mkSymlink pkgs;
+      mkSym = utils.mkSymlink host.settings.fleet.repoRoot pkgs;
     in
     {
       packages = with pkgs; [

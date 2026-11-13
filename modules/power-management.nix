@@ -1,14 +1,18 @@
-{ ... }:
+{ lib, ... }:
 {
   den.aspects.power-management = {
     includes = [
       (
         { host, ... }:
+        let
+          resumeOffset = host.settings.swap.resumeOffset;
+          luksDevices = host.settings.luks.devices;
+        in
         {
-          nixos.boot.kernelParams = [
-            "resume_offset=${toString host.swapResumeOffset}"
-          ];
-          nixos.boot.resumeDevice = "/dev/mapper/${builtins.head (host.luksDevices or [ "" ])}";
+          nixos = {
+            boot.kernelParams = lib.optional (resumeOffset != null) "resume_offset=${toString resumeOffset}";
+            boot.resumeDevice = lib.mkIf (luksDevices != [ ]) "/dev/mapper/${builtins.head luksDevices}";
+          };
         }
       )
     ];

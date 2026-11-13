@@ -17,6 +17,7 @@
     includes = with den.aspects; [
       core
       displaylink
+      intel-graphics
       power-management
       intune
       networking
