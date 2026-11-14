@@ -9,19 +9,11 @@ let
       config = prev.lib.filterAttrs (_: value: value != null) prev.config;
     };
 
-  small = mkChannel inputs.nixpkgs-small;
   stable = mkChannel inputs.nixpkgs-stable;
 in
 {
-  channels = { inherit small stable; };
+  channels = { inherit stable; };
 
-  # small
-  dux-files = small.dux-files;
-  dux-greeter = small.dux-greeter;
-  dux-search = small.dux-search;
-  dux-shell = small.dux-shell;
-
-  # stable
   azure-cli = stable.azure-cli;
   azure-functions-core-tools = stable.azure-functions-core-tools;
   bicep = stable.bicep;
